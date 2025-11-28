@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 5 章：在线底图与天地图生态</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="5">第 5 章：在线底图与天地图生态</h1>
+<p><strong>——站在巨人的肩膀上：切片原理、国家标准与坐标系迷局</strong></p>
+<h2 id="1">1. 开篇段落</h2>
+<p>在第 1 至 4 章中，我们主要处理的是存储在本地硬盘上的“死数据”。无论是几百兆的 TIFF 影像还是几个 G 的 Shapefile，它们都是静态且有限的。然而，当我们试图构建一个“全球”级别的地图应用时，数据量将激增至 PB（Petabyte）级别。无论是存储成本还是网络带宽，都无法支撑将全量数据一次性传输给用户。</p>
+<p>本章将带你进入<strong>在线地图服务（Online Map Services）</strong>的世界。我们将从底层的<strong>瓦片金字塔（Tile Pyramid）</strong>原理讲起，揭示 Google Maps、OpenStreetMap 和天地图是如何让全球地图在浏览器中“秒开”的。我们将重点剖析中国官方的<strong>天地（Tianditu）</strong>生态，深入解读其特殊的“底图+注记”分层架构、双重坐标体系（<code>_c</code> 与 <code>_w</code> 的爱恨情仇），以及如何在工程实践中解决最令人头疼的“火星坐标”偏移问题。</p>
+<hr />
+<h2 id="2">2. 核心论述：切片地图的物理原理</h2>
+<h3 id="21-the-tile-pyramid">2.1 瓦片金字塔模型 (The Tile Pyramid)</h3>
+<p>在线地图的核心思想是“<strong>分而治之</strong>”和“<strong>预渲染</strong>”。服务器不是实时画图，而是预先将地球按照不同的比例尺切成数以亿计的小图片（瓦片，Tile），存在服务器硬盘里。</p>
+<h4 id="_1">逻辑结构</h4>
+<p>想象一个金字塔结构：</p>
+<ul>
+<li><strong>Level 0 (顶层)</strong>：用 1 张（或几张）图片覆盖整个地球。用户看到的是全球概览。</li>
+<li><strong>Level 1</strong>：将 Level 0 的每一张图片呈“田”字形切分为 4 张。</li>
+<li><strong>Level $z$</strong>：每一张图片继续一分为四。</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="o">%%</span><span class="w"> </span><span class="nf">ASCII</span><span class="w"> </span><span class="n">示意图</span><span class="err">：</span><span class="n">四叉树结构</span>
+<span class="w">       </span><span class="o">[</span><span class="n">Level 0</span><span class="o">]</span><span class="w">                  </span><span class="mi">1</span><span class="w"> </span><span class="n">Tile</span><span class="w"> </span><span class="p">(</span><span class="mi">256</span><span class="n">x256</span><span class="w"> </span><span class="n">px</span><span class="p">)</span>
+<span class="w">           </span><span class="o">|</span>
+<span class="w">     </span><span class="o">+-----+-----+</span>
+<span class="w">     </span><span class="o">|</span><span class="w">           </span><span class="o">|</span>
+<span class="w">  </span><span class="o">[</span><span class="n">Level 1</span><span class="o">]</span><span class="w">   </span><span class="o">[</span><span class="n">Level 1</span><span class="o">]</span><span class="w"> </span><span class="p">...</span><span class="w">       </span><span class="mi">4</span><span class="w"> </span><span class="n">Tiles</span>
+<span class="w">     </span><span class="o">|</span>
+<span class="w">  </span><span class="o">+--+--+</span>
+<span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="o">|</span>
+<span class="o">[</span><span class="n">L2</span><span class="o">]</span><span class="w">   </span><span class="o">[</span><span class="n">L2</span><span class="o">]</span><span class="w"> </span><span class="p">...</span><span class="w">                   </span><span class="mi">16</span><span class="w"> </span><span class="n">Tiles</span>
+</code></pre></div>
+
+<h4 id="_2">数学规律</h4>
+<p>假设瓦片大小为标准的 $256 \times 256$ 像素，对于 Web 墨卡托投影：</p>
+<ol>
+<li><strong>瓦片数量</strong>：第 $z$ 级的瓦片总数为 $N = 4^z$（或者是 $(2^z)^2$）。</li>
+<li><strong>空间分辨率</strong>：
+    在赤道处，地球周长约为 $C \approx 40,075,017$ 米。第 $z$ 级的像素分辨率（米/像素）近似公式为：
+    $$ R_z = \frac{C}{256 \times 2^z} $$
+由此可见，每增加一级，分辨率数值减半（即清晰度提高一倍）。</li>
+</ol>
+<blockquote>
+<p><strong>Rule of Thumb (尺度直觉)</strong>：</p>
+<ul>
+<li><strong>Level 0-2</strong>：看大洲轮廓。</li>
+<li><strong>Level 10-12</strong>：看城市路网结构。</li>
+<li><strong>Level 15</strong>：约为 4.7米/像素，能分清街区。</li>
+<li><strong>Level 18</strong>：约为 0.6米/像素，能看清<strong>房屋轮廓</strong>。这是绝大多数民用卫星影像的极限。</li>
+<li><strong>Level 20+</strong>：需要无人机或航空影像支持，能看清车辆、斑马线。</li>
+</ul>
+</blockquote>
+<hr />
+<h3 id="22-wms-wmts-xyz">2.2 三服务协议：WMS, WMTS 与 XYZ</h3>
+<p>在调用地图时，你实际上是在和服务器“对话”。根据对话方式不同，分为三种流派：</p>
+<p>| 协议 | 全称 | 性质 | 描述 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">协议</th>
+<th style="text-align: left;">全称</th>
+<th style="text-align: left;">性质</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>WMS</strong></td>
+<td style="text-align: left;">Web Map Service</td>
+<td style="text-align: left;"><strong>动态裁切</strong></td>
+<td style="text-align: left;">OGC 标准。客户端发给服务器一个经纬度框 (BBOX)，服务器现场画一张图传回来。<strong>优点</strong>：灵活、实时；<strong>缺点</strong>：慢，服务器负载高，无法缓存。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>WMTS</strong></td>
+<td style="text-align: left;">Web Map Tile Service</td>
+<td style="text-align: left;"><strong>静态切片</strong></td>
+<td style="text-align: left;">OGC 标准。客户端请求特定的行(Row)、列(Col)、级(Level)。服务器直接返回预存的图片。<strong>优点</strong>：标准化、支持多种投影；<strong>缺点</strong>：配置 XML 极其复杂。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>XYZ</strong></td>
+<td style="text-align: left;">(Slippy Map)</td>
+<td style="text-align: left;"><strong>事实标准</strong></td>
+<td style="text-align: left;">互联网非官方标准（Google/OSM 推广）。直接通过 URL 模板访问文件路径。<strong>优点</strong>：极简、极快、缓存友好。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>XYZ 的 URL 模板</strong>：
+这是本章最重要的公式之一。几乎所有 Web 前端库都通过这个模板加地图：
+$$ \texttt{https://domain.com/}\{z\}/\{x\}/\{y\}\texttt{.png} $$
+其中 $z$ 是缩放等级，$x$ 是列号（经度方向），$y$ 是行号（纬度方向）。</p>
+<hr />
+<h3 id="23">2.3 天地图生态详解</h3>
+<p><strong>天地图（Map World）</strong> 是国家地理信息公共服务平台。与商业地图（高德、百度）不同，它具有<strong>官方性</strong>（国界线绘制标准）、<strong>数据分层性</strong>和<strong>坐标纯净性</strong>。</p>
+<h4 id="a">A. “三明治”分层策略</h4>
+<p>天地图不提供“一张画好所有东西的图”，而是提供积木。你需要像做三明治一样叠加图层：</p>
+<ol>
+<li>
+<p><strong>底层：底图 (Base Layer)</strong></p>
+<ul>
+<li><strong>影像底图 (<code>img</code>)</strong>：卫星遥感影像，那是地球的真面目。</li>
+<li><strong>矢量底图 (<code>vec</code>)</strong>：只有背景色、水系、绿地和浅色道路，<strong>没有文字</strong>。</li>
+<li><strong>地形底图 (<code>ter</code>)</strong>：带有山体阴影（Hillshade）的晕渲图。</li>
+</ul>
+</li>
+<li>
+<p><strong>顶层：注记 (Annotation Layer)</strong></p>
+<ul>
+<li><strong>影像注记 (<code>cia</code>)</strong>：透明背景，上面印着白色的地名、名。</li>
+<li><strong>矢量注记 (<code>cva</code>)</strong>：透明背景，印着黑色的地名。</li>
+<li><strong>地形注记 (<code>cta</code>)</strong>：配合地形图的注记。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>常见错误</strong>：初学者常犯的错误是只加载了 <code>vec</code>，结果发现地图上光秃秃的一个字都没有；或者只加载了 <code>cva</code>，结果看到全是悬浮在空中的文字。<strong>必须成对加载</strong>。</p>
+</blockquote>
+<h4 id="b">B. 两个平行宇宙：投影体系</h4>
+<p>天地图同时提供两套切片矩阵，通过 URL 中的后缀区分。选错后缀是导致地图变形、无法叠加的根源。</p>
+<ol>
+<li>
+<p><strong>经纬度投影 (LatLon, EPSG:4490 / EPSG:4326)</strong></p>
+<ul>
+<li><strong>标识</strong>：URL 中包含 <code>_c</code> (代表 <strong>C</strong>hina 或 <strong>C</strong>artesian)。</li>
+<li><strong>切片形状</strong>：<strong>矩形</strong>（非正方形）。因为在地理坐标系中，经度和纬度的度数虽然相等，但实际距离随纬度变化。</li>
+<li><strong>适用场景</strong>：政府项目、GIS 专业分析、需要与北斗/CGCS2000 矢量严格套合的场景。</li>
+<li><strong>兼容性</strong>：Web 前端库（如 Leaflet/Mapbox默认不支持，需额外插件或配置自定义 CRS。</li>
+</ul>
+</li>
+<li>
+<p><strong>球面墨卡托投影 (Web Mercator, EPSG:3857)</strong></p>
+<ul>
+<li><strong>标识</strong>：URL 中包含 <code>_w</code> (代表 <strong>W</strong>eb)。</li>
+<li><strong>切片形状</strong>：<strong>正方形</strong> (256x256)。</li>
+<li><strong>适用场景</strong>：互联网大众应用。</li>
+<li><strong>兼容性</strong>：与 Google Maps、OSM、Bing Maps 完全一致，现有 Web 库开箱即用。</li>
+</ul>
+</li>
+</ol>
+<h4 id="c-url">C. URL 构造解剖</h4>
+<p>一个典型的天地图 XYZ 请求链接如下：
+<code>http://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER=img&amp;STYLE=default&amp;TILEMATRIXSET=w&amp;FORMAT=tiles&amp;TILEMATRIX={z}&amp;TILEROW={y}&amp;TILECOL={x}&amp;tk=你的密钥</code></p>
+<ul>
+<li><strong>Subdomain (<code>t0</code> - <code>t7</code>)</strong>：为了突破浏览器对同一域名并发请求数的限制，通常随机轮询 <code>t0</code> 到 <code>t7</code>。</li>
+<li><strong>Layer (<code>img</code>)</strong>：指定数据类型。</li>
+<li><strong>MatrixSet (<code>w</code>)</strong>：指定投影体系（这里是 Web 墨卡托）。</li>
+<li><strong>TileMatrix/Row/Col</strong>：对应的 XYZ 变量。</li>
+<li><strong>tk (Token)</strong>：必填的访问密钥。</li>
+</ul>
+<hr />
+<h2 id="3-gotchas">3. 常见陷阱与错误 (Gotchas)</h2>
+<p>本章的陷阱主要集中在<strong>坐标系</strong>和<strong>权限配置</strong>上。</p>
+<h3 id="1-wgs84-vs-gcj-02-vs-bd-09">陷阱 1：坐标系的“巴别塔” (WGS84 vs. GCJ-02 vs. BD-09)</h3>
+<p>这是在中国做地图开发最大的坑，没有之一。</p>
+<ul>
+<li><strong>WGS84 / CGCS2000</strong>：<ul>
+<li><em>谁在用</em>：天地图、GPS 芯片原始读数、OSM、Google Maps (卫星图部分)。</li>
+<li><em>关系</em>：CGCS2000 是中国国家坐标系，与 WGS84 差异极小（厘米级），在 Web 地图中通常视为<strong>同一个</strong>。</li>
+</ul>
+</li>
+<li><strong>GCJ-02 (火星坐标)</strong>：<ul>
+<li><em>谁在用</em>：高德、腾讯、Google Maps (中国区矢量街道部分)。</li>
+<li><em>特征</em>：国家规定的加密偏移，为了安全，随机偏离真实位置几百米。</li>
+</ul>
+</li>
+<li><strong>BD-09</strong>：<ul>
+<li><em>谁在用</em>：百度地图。</li>
+<li><em>特征</em>：在 GCJ-02 基础上再次加密。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>致命错误场景</strong>：
+你手头有一份从高德地图抓取的 POI 数据（GCJ-02），然后你把它叠加到了天地图（CGCS2000）上。
+<strong>结果</strong>：所有的餐馆“漂移”到了马路对面或者河里。</p>
+<p><strong>解决方案</strong>：<strong>同系才能叠加</strong>。</p>
+<ol>
+<li>要么把 POI 数据反向纠偏转回 WGS84/CGCS2000。</li>
+<li>要么把天地图（如果可能）进行偏移（不推荐，底图很难偏）。</li>
+<li><strong>Rule of Thumb</strong>：做专业 GIS / 遥感 / 科学数据分析，<strong>坚决使用 WGS84/CGCS2000</strong>，远离火星坐标。</li>
+</ol>
+</blockquote>
+<h3 id="2-_c-_w">陷阱 2：混合使用 <code>_c</code> 和 <code>_w</code></h3>
+<ul>
+<li><strong>现象</strong>：在 Web 地图库（如 Cesium 或 Leaflet）中加载天地图，发现地图被压扁了，或者位置完全不对。</li>
+<li><strong>原因</strong>：你的地图容器（Map View）定义的是 EPSG:3857（墨卡托），但你请求的 URL 却是 <code>img_c</code>（经纬度投影）。</li>
+<li><strong>调试</strong>：检查 URL。如果是 Web 项目，99% 的情况你应该使用 <code>_w</code> 系列。</li>
+</ul>
+<h3 id="3key-token">陷阱 3：Key (Token) 的限制</h3>
+<ul>
+<li><strong>现象</strong>：本地开发（localhost）时地图正常，一部署到公司服务器，地图就变白或报错 403。</li>
+<li><strong>原因</strong>：天地图的 Key 分为“浏览器端”和“服务器端”。浏览器端 Key 通常会绑定 Referer 白名单（即只允许特定的域名访问）。</li>
+<li><strong>调试</strong>：去天地图控制台检查 Key 的类型和白名单设置。如果是桌面 GIS（QGIS），通常使用“服务器端”类型的 Key 或者不限制 Referer 的浏览器 Key。</li>
+</ul>
+<hr />
+<h2 id="4">4. 本章小结</h2>
+<ol>
+<li><strong>切片原理</strong>：Web 地图通过 <strong>瓦片金字塔</strong> ($4^z$) 结构，利用预渲染的小图片实现全球数据的快速加载。</li>
+<li><strong>数据分层</strong>：天地图不提供“整图”，而是将 <strong>底图 (img/vec/ter)</strong> 与 <strong>注记 (cia/cva/cta)</strong> 分离，开发者必须像叠三明治一样组合使用。</li>
+<li><strong>投影二元论</strong>：<ul>
+<li><code>_w</code> (Web Mercator, EPSG:3857)：方形瓦片，适合 Web 公众应用，兼容 Google/OSM。</li>
+<li><code>_c</code> (LatLon, EPSG:4490)：矩形瓦片，适合专业 GIS 与国家标准数据对接。</li>
+</ul>
+</li>
+<li><strong>坐标系铁律</strong>：天地图使用 <strong>CGCS2000 (≈WGS84)</strong>。严禁直接叠加高德/腾讯 (GCJ-02) 或百度 (BD-09) 的数据，必须先进行纠偏转换。</li>
+</ol>
+<hr />
+<p><a href="chapter6.html">下一章：吉林一号影像与“全国一张图 / 全球一张图”</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter4.html" class="nav-link prev">← 第 4 章：DEM 与地形分析基础</a><a href="chapter6.html" class="nav-link next">第 6 章：吉林一号影像与“全国一张图 / 全球一张图” →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="7-noaasentinel"><a href="chapter7.html">第 7 章：NOAA、Sentinel 等开源卫星数据应用</a></h1>
+<p>在上一章，我们体验了吉林一号等商业卫星带来的“上帝视角”，看清了城市的肌理与车辆的流动。然而，地球不仅仅是由水泥和沥青构成的。对于农业估产、环境监测、灾害应急以及全球尺度的地理分析而言，我们需要一种能够<strong>高频次</strong>、<strong>广覆盖</strong>且<strong>免费</strong>获取的数据源。</p>
+<p>本章我们将进入开源（Open Data）遥感的大门。以美国的 NOAA/Landsat 和欧洲的 Sentinel（哨兵）系列为代表，这些卫星数据构成了现代数字地球的“底色”。它们不再仅仅是“照片”，而是地球表面的“医疗扫描仪”，通过多光谱波段揭示人眼无法感知的物理化学特性。</p>
+<hr />
+<h2 id="71">7.1 源卫星数据的“生态位”</h2>
+<p>在商业项目中，我们经常面临“买数据”还是“用免费数据”的抉择。理解开源卫星的特性至关重要，它们通常具备“三高一低”的特征：</p>
+<ol>
+<li><strong>高时间分辨率（High Temporal Resolution）</strong><ul>
+<li><strong>含义</strong>：卫星重访同一地点的频率极高。</li>
+<li><strong>价值</strong>：Sentinel-2 双星组网后可实现 5 天重访，NOAA 气象卫星甚至可以每 10-15 分钟更新一次。这使得构建“时间序列（Time Series）”成为可能，比如监测农作物从播种到收割的全过程。</li>
+</ul>
+</li>
+<li><strong>高光谱分辨率（High Spectral Resolution）</strong><ul>
+<li><strong>含义</strong>：不仅有 RGB，还有几十个细分的波段（红边、近红外、热红外等）。</li>
+<li><strong>价值</strong>：这是区分真假植被、识别矿物成分、反演水体叶绿素浓度的关键。</li>
+</ul>
+</li>
+<li><strong>高覆盖率与标准化（High Coverage &amp; Standardization）</strong><ul>
+<li><strong>含义</strong>：无论你要非洲草原还是南极冰盖的数据，只要层允许，都有存档。且数据经过严格的辐射定标和几何校正。</li>
+</ul>
+</li>
+<li><strong>较低的空间分辨率（Moderate/Low Spatial Resolution）</strong><ul>
+<li><strong>含义</strong>：通常在 10m - 1000m 之间。</li>
+<li><strong>妥协</strong>：为了看得更宽（幅宽大）和存得更多，必须牺牲细节。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Rule of Thumb (选型经验法则)</strong></p>
+<ul>
+<li><strong>找车、找房、查违建</strong> $\rightarrow$ <strong>商业卫星</strong> (0.3m - 0.8m)。</li>
+<li><strong>看农田长势、算湖泊面积、看森林砍伐</strong> $\rightarrow$ <strong>Sentinel-2 / Landsat</strong> (10m - 30m)。</li>
+<li><strong>看台风、看洋流、看全省雾霾</strong> $\rightarrow$ <strong>NOAA / MODIS / Sentinel-3</strong> (250m - 1km)。</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="72-noaa">7.2 NOAA 与气象卫星：地球的脉搏</h2>
+<p>NOAA（美国国家海洋和大气管理局）的数据不仅仅用于天气预报，在 GIS 领域，它们常作为大尺度的背景场或专题图层。</p>
+<h3 id="721">7.2.1 轨道类型与观测视角</h3>
+<p>理解气象卫星，首先要区分两种核心轨道：</p>
+<ol>
+<li>
+<p><strong>静止轨道 (Geostationary, GEO)</strong></p>
+<ul>
+<li><strong>代表</strong>：GOES 系列（美）、Himawari（日）、风云四号（中）。</li>
+<li><strong>视角</strong>：卫星悬停在赤道上空 3.6 万公里，与地球自转同步，“盯着”地球的固定一面。</li>
+<li><strong>应用</strong>：制作实时的<strong>“圆盘云图”</strong>。Web 地图中那种每小时更新的台风路径底图，就来自这里。</li>
+</ul>
+</li>
+<li>
+<p><strong>极轨 (Polar Orbiting, LEO)</strong></p>
+<ul>
+<li><strong>代表</strong>：NOAA-20 (JPSS), Suomi NPP。</li>
+<li><strong>视角</strong>：高度较低（约 800km），绕着南北极飞，地球在下面转。就像削苹果皮一样，每天覆盖全球两次。</li>
+<li><strong>应用</strong>：获取全球无缝拼接的合成图。</li>
+</ul>
+</li>
+</ol>
+<h3 id="722-viirs-nighttime-lights">7.2.2 核心产品：VIIRS 夜光遥感 (Nighttime Lights)</h3>
+<p>Suomi NPP 卫星搭载的 VIIRS 传感器拥有极高灵敏度的“日/夜波段（DNB）”。</p>
+<ul>
+<li><strong>不仅仅是灯光</strong>：它能捕捉城市灯光、渔船火光、天然气燃烧火焰，甚至月光反射下的云层。</li>
+<li><strong>GIS 应用</strong>：<ul>
+<li><strong>GDP 估算</strong>：夜光亮度与区域经济活动高度正相关。</li>
+<li><strong>人口分布</strong>：辅助校正人口密度栅格。</li>
+<li><strong>灾害评估</strong>：地震或飓风后的断电区域识别（通过对比灾前灾后影像）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="73-sentinel">7.3 Sentinel（哨兵）系列：哥白尼计划的馈赠</h2>
+<p>由欧空局（ESA）主导的哥白尼计划是目前全球最大的对地观测项目。其中 Sentinel-2 是 Web GIS 开发者最常用的数据源。</p>
+<h3 id="731-sentinel-2-optical">7.3.1 Sentinel-2：多光谱的王者 (Optical)</h3>
+<p>它被设计为接棒美国的 Landsat，但参数更强。</p>
+<ul>
+<li><strong>多波段设计</strong>：<ul>
+<li><strong>10m 波段</strong>：B2(蓝), B3(绿), B4(红), B8(宽近红外)。这是最常用的四个波段，用于合成真彩色和高分辨率 NDVI。</li>
+<li><strong>20m 波段</strong>：B5, B6, B7 (红边 Red Edge), B8A (窄近红外), B11, B12 (短波红外 SWIR)。</li>
+<li><strong>60m 波段</strong>：B1, B9, B10。主要用于大气校正（气溶胶、水汽、卷云），通常不用于直接可视化。</li>
+</ul>
+</li>
+<li><strong>红边 (Red Edge)</strong>：这是 Sentinel-2 的杀手锏。位于红光和近红外之间，对植被康状况极其敏感，常用于精准农业。</li>
+</ul>
+<h3 id="732-sentinel-1-sar">7.3.2 Sentinel-1：穿云透雾的雷达 (SAR)</h3>
+<ul>
+<li><strong>特性</strong>：搭载 C 波段合成孔径雷达。</li>
+<li><strong>应用</strong>：在多云多雨地区（如东南亚、亚马逊），光学卫星可能几个月拍不到一张图，Sentinel-1 却能照常成像。</li>
+<li><em>(注：SAR 的成像机制非常独特，我们将在第 8 章详细拆解)</em></li>
+</ul>
+<h3 id="733-sentinel-3-5p">7.3.3 Sentinel-3 &amp; 5P：海洋与大气</h3>
+<ul>
+<li><strong>Sentinel-3</strong>：不仅看海洋颜色（水质），还能测海面高度（雷达高度计）和海表温度。</li>
+<li><strong>Sentinel-5P</strong>：空气质量监测站。它能量化对流层中的二氧化氮（NO2）、臭氧、二氧化硫等浓度。疫情期间全球工厂停工导致的 NO2 下降图，多出自该卫星。</li>
+</ul>
+<hr />
+<h2 id="74">7.4 深入多光谱：看见不可见的世界</h2>
+<p>为什么卫星要有那么多波段？因为不同物质对不同波长光的反射特性（光谱特征标记，Spectral Signature）截然不同。</p>
+<h3 id="741">7.4.1 物理原理：植被的光谱曲线</h3>
+<p><strong>ASCII 图解：典型绿色植被反射曲线</strong></p>
+<div class="codehilite"><pre><span></span><code>反射率 (Reflectance %)
+^
+|                    (NIR: 细胞结构散射)
+|               /---------------------\ High (~40-50%)
+|              /
+| (Red Edge)  /
+|            /
+|   Green   /
+|    /-\   /
+|   /   \ /
+|  /     V (Red: 叶绿素吸收)
+|_/      
++------------------------------------------&gt; 波长 (nm)
+ 400(B) 500(G) 600(R) 700   800(NIR)
+</code></pre></div>
+
+<ol>
+<li><strong>可见光区</strong>：叶绿素吸收红光和蓝光进行光合作用，稍微反射一点绿光（所以树是绿的）。</li>
+<li><strong>红边 (Red Edge)</strong>：反射率急剧爬升的区域。</li>
+<li><strong>近红外区 (NIR)</strong>：植物叶片内部的海绵组织结构会强烈散射近红外光。<strong>这是为了避免过热</strong>。如果植物生病或缺水，海绵组织塌陷，NIR 反射率会迅速下降。</li>
+</ol>
+<h3 id="742-band-combinations">7.4.2 常用波段组合 (Band Combinations)</h3>
+<p>在 Web 地图前端（如 Leaflet/Cesium）或后端（GDAL）渲染时，我们可以将卫星波段映射到屏幕的 R、G、B 通道：</p>
+<ol>
+<li><strong>真彩 (True Color)</strong><ul>
+<li>映射：<code>R=Band4, G=Band3, B=Band2</code></li>
+<li>用途：符合人眼习惯，用于底图展示。</li>
+</ul>
+</li>
+<li><strong>标准假彩色 (Color Infrared / CIR)</strong><ul>
+<li>映射：<code>R=Band8 (NIR), G=Band4 (Red), B=Band3 (Green)</code></li>
+<li>效果：植被呈<strong>鲜红色</strong>，水体呈黑色/深蓝，城市呈青灰色。</li>
+<li>用途：极易区分植被与非植被，分辨针叶林与阔叶林。</li>
+</ul>
+</li>
+<li><strong>短波红外组合 (False Color Urban)</strong><ul>
+<li>映射：<code>R=Band12 (SWIR), G=Band11, B=Band4</code></li>
+<li>用途：SWIR 能穿透薄雾和烟雾。常用于看火灾火点（显得非常亮）或区分云和雪（云在 SWIR 下反射高，雪反射低）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="743">7.4.3 关键指数计算</h3>
+<p>指数计算是把多波段数据压缩成单波段（单通道灰度图）的数学过程。</p>
+<ol>
+<li><strong>NDVI (归一化植被指数)</strong>
+$$ NDVI = \frac{NIR - Red}{NIR + Red} $$</li>
+</ol>
+<ul>
+<li><strong>原理</strong>：利用“红光吸收”与“近红外反射”的反差。反差越大，植被越健康。</li>
+<li><strong>数值含义</strong>：<ul>
+<li>$-1 \sim 0$：水体。</li>
+<li>$0 \sim 0.1$：岩石、沙地、水泥。</li>
+<li>$0.2 \sim 0.5$：稀疏植被（草地、灌木）。</li>
+<li>$0.6 \sim 0.9$：茂密森林、生长旺盛的农作物。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>MNDWI (改进归一化水体指数)</strong>
+$$ MNDWI = \frac{Green - SWIR}{Green + SWIR} $$</li>
+</ol>
+<ul>
+<li><strong>原理</strong>：水体在可见光有反射，在短波红外（SWIR）几乎完全吸收。</li>
+<li><strong>优势</strong>：相比使用 NIR 的普通 NDWI，使用 SWIR 能更有效地剔除城市建筑阴影的干扰（阴影在 NIR 波段有时像水，但在 SWIR 波段不像）。</li>
+</ul>
+<hr />
+<h2 id="75-cog-stac">7.5 现代数据访问架构：COG 与 STAC</h2>
+<p>传统的“下载-解压-处理”模式面对 PB 级数据已不可行。现代 GIS 采用“云原生”架构。</p>
+<h3 id="751-stac-spatiotemporal-asset-catalog">7.5.1 STAC (SpatioTemporal Asset Catalog)</h3>
+<p>卫星数据文件成千上万，且命名复杂。STAC 是一个标准化的 JSON 规范，用于描述“这块数据在哪里、是什么时间、包含哪些波段”。</p>
+<ul>
+<li>它让我们可以像搜索商品一样搜索卫星影像：<code>Query(bbox=[...], time="2023-01-01/2023-02-01", cloud_cover&lt;10)</code>。</li>
+</ul>
+<h3 id="752-cog-cloud-optimized-geotiff">7.5.2 COG (Cloud Optimized GeoTIFF)</h3>
+<p>这是改变行业的游戏规则。</p>
+<ul>
+<li><strong>传统 TIFF</strong>：要读取最后一行像素，可能需要下载整个文件。</li>
+<li><strong>COG</strong>：文件内部经过分块（Tile）和建立金字塔索引。</li>
+<li><strong>HTTP Range Request</strong>：Web 客户端（或后端 GDAL）可以向服务器发送请求：“我只要这个大文件里，第 1024 到 2048 字节的数据”。</li>
+<li><strong>结果</strong>：你可以在浏览器上浏览几十 GB 的 Sentinel-2 影像，而实际上只消耗了屏幕可视区域那几 MB 的流量。</li>
+</ul>
+<hr />
+<h2 id="76-web">7.6 实战流程：制作“城市洪涝前后对比”Web 地图</h2>
+<p>假设任务是展示某次暴雨后的淹没区域。</p>
+<p><strong>步骤 1：数据检索 (Query)</strong></p>
+<ul>
+<li>使用 STAC API（如 Element84 或 Microsoft Planetary Computer）。</li>
+<li>条件：<code>collection="sentinel-2-l2a"</code>, <code>bbox=城市坐标</code>, <code>date</code> 分别为灾前和灾后。</li>
+<li>过滤：选择灾后云量最少的一景。如果灾后全是云，则需要切换到 Sentinel-1 (SAR)。</li>
+</ul>
+<p><strong>步骤 2：波段选择与指数计算</strong></p>
+<ul>
+<li>灾前影像：计算 MNDWI，提取常态水体掩膜。</li>
+<li>灾后影像：计算 MNDWI，提取当前水体掩膜。</li>
+<li><strong>差值运算</strong>：$FloodMask = MNDWI_{post} - MNDWI_{pre}$。正值显著区域即为新增水体。</li>
+</ul>
+<p><strong>步骤 3：切片与发布 (Tiling)</strong></p>
+<ul>
+<li>不下载原始数据，使用 GDAL 的 <code>/vsicurl/</code> 虚拟文件系统直接读取在线 COG URL。</li>
+<li>将运算结果动态切片（On-the-fly Tiling）或预渲染为 XYZ 瓦片（PNG 格式，透明背景，蓝色表示淹没区）。</li>
+</ul>
+<p><strong>步骤 4：前端展示</strong></p>
+<ul>
+<li>底图：天地图矢量（提供道路、地名参考）。</li>
+<li>图层 A：灾前真彩色影像（卷帘对比）。</li>
+<li>图层 B：灾后淹没分析层（半透明蓝色叠加）。</li>
+</ul>
+<hr />
+<h2 id="77">7.7 本章小结</h2>
+<ol>
+<li><strong>开源双雄</strong>：<strong>NOAA/MetOp</strong> 负责高频气象与宏观环境；<strong>Sentinel/Landsat</strong> 负责地表细节监测。</li>
+<li><strong>Sentinel-2</strong> 是目前免费获取 10m 光学数据的首选，其 <strong>Red Edge</strong> 波段对植被分析价值巨大。</li>
+<li><strong>光谱分析</strong>：通过 <strong>NDVI</strong>、<strong>MNDWI</strong> 等指数，我们将“看图说话”转变为“定量分析”。</li>
+<li><strong>云原生趋势</strong>：不再下载数据。利用 <strong>STAC</strong> 索引和 <strong>COG</strong> 技术，让代码直接在云端“流式”处理数据。</li>
+</ol>
+<hr />
+<h2 id="78-gotchas">7.8 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1-toa-l1c-srboa-l2a">1. 混淆 TOA (L1C) 与 SR/BOA (L2A)</h3>
+<ul>
+<li><strong>L1C (Top of Atmosphere)</strong>：卫星在大气层顶看到的亮度。包含雾霾、气溶胶的散射光。看起来通常发白、发蓝。</li>
+<li><strong>L2A (Bottom of Atmosphere / Surface Reflectance)</strong>：经过大气校正，还原地表真实反射率。</li>
+<li><strong>陷阱</strong>：计算 NDVI 时，如果混用 L1C 和 L2A 数据，或者只用 L1C，时间序列曲线会因为天气变化而剧烈跳动，导致误判。<strong>做分析务必用 L2A。</strong></li>
+</ul>
+<h3 id="2-qa">2. 忽略 QA 波段（质量控制）</h3>
+<ul>
+<li><strong>现象</strong>：NDVI 图上出现极高值（云）或极低值（云阴影）。</li>
+<li><strong>陷阱</strong>：简单过滤 <code>cloud_cover &lt; 10%</code> 是指“整张图”云量。你的研究区可能正好在那 10% 的云底下。</li>
+<li><strong>对策</strong>：必须加载 <strong>QA60 / SCL (Scene Classification Layer)</strong> 波段，将云、阴影、饱和像素设为 NoData (透明)。</li>
+</ul>
+<h3 id="3">3. 波段分辨率不匹配的矩阵运算</h3>
+<ul>
+<li><strong>错误</strong>：尝试直接做 <code>(Band8 - Band11) / ...</code>。</li>
+<li><strong>原因</strong>：Sentinel-2 的 Band8 是 10m，Band11 是 20m。矩阵大小不一样（例如 1000x1000 vs 500x500）。</li>
+<li><strong>对策</strong>：运算前必须通过“最近邻”或“双线性插值”将 20m 波段<strong>重采样 (Upsample)</strong> 到 10m。</li>
+</ul>
+<h3 id="4">4. 这里的“蓝色”不是水</h3>
+<ul>
+<li><strong>陷阱</strong>：在真彩色合成图中，深色的阴影（山体背阴面、高楼阴影）经常被误认为是水。</li>
+<li><strong>对策</strong>：仅靠 RGB 无法区分。这正是我们需要 NIR 和 SWIR 波段的原因——水在这些波段极其“黑”（吸收），而阴影通常还有微弱反射。</li>
+</ul>
+<hr />
+<p><a href="chapter6.html">上一章：吉林一号影像与“全国一张图 / 全球一张图”</a> | <a href="chapter8.html">下一章：SAR 影像与多光谱影像进阶</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter6.html" class="nav-link prev">← 第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</a><a href="chapter8.html" class="nav-link next">第 8 章：SAR 影像与多光谱影像进阶 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

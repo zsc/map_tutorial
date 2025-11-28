@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 10 章：从三维到街景——采集流程与 Street View API</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="10-street-view-api">第 10 章：从三维到街景——采集流程与 Street View API</h1>
+<p><strong>导航</strong>：<a href="index.html">返回目录</a> | <a href="chapter9.html">上一章：从 nadir 到三维</a> | <a href="chapter11.html">下一章：室内地图构建与 BIM 融合</a></p>
+<hr />
+<h2 id="1">1. 开篇段落：从“上帝视角”回归“人类视角”</h2>
+<p>在前几章中，我们构建了数字地球的骨架：卫星影像提供了宏观的地表覆盖，DEM 赋予了地形起伏，倾斜摄影模型重建了城市的立体轮廓。然而，这些数据都有一个共同的局限——它们都是<strong>俯视</strong>的。</p>
+<p><strong>街景（Street View）</strong> 是地图体系中唯一提供<strong>平视（Ego-centric）</strong> 体验的数据源。它填补了 GIS 数据与人类真实感知之间的“最后一公里”。在这一层级，我们不再关心“屋顶是什么颜色”，而是关心“商店招牌写了什么”、“路面是否有坑洼”以及“站在路口能否看到地标建筑”。</p>
+<p>本章将揭开街景技术的黑盒。我们将从移动测量系统（MMS）的硬件采集讲起，剖析全景图的球面投影原理与切片金字塔结构，详细推导从地图坐标到全景视角的几何变换公式，并探讨街景背后的隐形数据——深度图（Depth Map）与全景拓扑图（Pano Graph）。</p>
+<hr />
+<h2 id="2">2. 核心论述</h2>
+<h3 id="21-mms">2.1 移动测量系统（MMS）：不仅仅是照相机</h3>
+<p>街景采集车（或背包、手推车）本质上是一个<strong>移动测量系统（Mobile Mapping System, MMS）</strong>。它并不是简单地拍照片，而是在高速运动中同步记录空间位置与姿态。</p>
+<h4 id="211">2.1.1 传感器融合</h4>
+<p>一个标准的街景采集单元通常包含以下核心组件，它们通过<strong>微秒级</strong>的时间同步机制协同工作：</p>
+<ol>
+<li>
+<p><strong>全景相机模组（The Rosette）</strong>：</p>
+<ul>
+<li>通常 5-8 个广角镜头组成，呈莲花状排列。</li>
+<li><strong>原理</strong>：所有镜头同时曝光，覆盖水平 $360^\circ$ 和垂直 $180^\circ$（除去车顶遮挡部分）。</li>
+<li><strong>关键指标</strong>：重叠率（Overlap）。相邻镜头的视野必须有足够的重叠，以便后续通过特征点匹配进行无缝拼接。</li>
+</ul>
+</li>
+<li>
+<p><strong>定位定姿系统（POS - GNSS + IMU）</strong>：</p>
+<ul>
+<li><strong>GNSS</strong>：获取绝对经纬度。</li>
+<li><strong>IMU（惯性测量单元）</strong>：高频记录车辆的加速度和角速度。</li>
+<li><strong>作用</strong>：在城市峡谷（高楼遮挡 GPS 信号）中，依靠 IMU 的“惯性推算”保持轨迹连续，并记录每一帧图像拍摄时的<strong>三轴姿态（Roll, Pitch, Yaw）</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>激光雷达（LiDAR）</strong>：</p>
+<ul>
+<li>虽然街景看似是图像，但现代采集车都会搭载 LiDAR。</li>
+<li><strong>用途 1</strong>：构建粗糙的街道三维模型，用于图像拼接时的几何校正（防止近处物体拼接错位）。</li>
+<li><strong>用途 2</strong>：生成<strong>深度图（Depth Map）</strong>，这是实现“全景测距”和“3D 转场动画”的基础。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><strong>Rule of Thumb (经验法则)</strong>：
+街景图像中的“北方”并不一定是图片的上方或正中心。原始图像是相对于车头方向拍摄的。必须结合 <strong>IMU 记录的偏航角（Yaw / Heading）</strong>，在后处理中将图像“旋转”对齐到地理正北，才能在地图应用中正确使用。</p>
+</blockquote>
+<hr />
+<h3 id="22">2.2 数据结构：从球面到平面的数学映射</h3>
+<h4 id="221-equirectangular-projection">2.2.1 等距长方投影（Equirectangular Projection）</h4>
+<p>为了将球面的全景图存储为一张二维图片文件（如 JPEG），最通用的标准是等距长方投影。</p>
+<ul>
+<li><strong>映射逻辑</strong>：将经度映射为 X 轴，纬度映射为 Y 轴。</li>
+<li><strong>网格关系</strong>：<ul>
+<li>$x$ 轴范围：$-180^\circ \sim +180^\circ$</li>
+<li>$y$ 轴范围：$-90^\circ \sim +90^\circ$</li>
+<li>图片宽高比严格为 <strong>2:1</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>ASCII 示意图：投影网格</strong></p>
+<div class="codehilite"><pre><span></span><code>(0,0) 图片左上角
+  +-----------------------------------------+  纬度 +90 (极点被拉伸为一条线)
+  |      /   \                   /   \      |
+  |     /     \                 /     \     |
+  |    /       \               /       \    |
+  |---|---------|-------------|---------|---|  纬度 0 (赤道，无变形)
+  |    \       /               \       /    |
+  |     \     /                 \     /     |
+  |      \   /                   \   /      |
+  +-----------------------------------------+  纬度 -90 (南极点被拉伸为一条线)
+经度: -180       -90           0          +90        +180
+</code></pre></div>
+
+<h4 id="222-panorama-tiles">2.2.2 瓦片金字塔（Panorama Tiles）</h4>
+<p>与卫星地图类似，高分辨率的街景（例如 14000 x 7000 像素）不会一次性加载。它同样采用了瓦片金字塔结构：</p>
+<ul>
+<li><strong>Zoom 0</strong>：一张低分辨率的缩略全景图。</li>
+<li><strong>Zoom 1</strong>：将全景图切分为 $2 \times 1$ 或 $4 \times 2$ 的网格。</li>
+<li><strong>Zoom N</strong>：用户查看局部细节时，仅加载视口范围内的特定瓦片。</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：这里的“Zoom”是全景图内部的缩放级别，与地图底图的 Zoom Level 是两套独立的系统。</p>
+</blockquote>
+<hr />
+<h3 id="23-api">2.3 API 交互核心：几何计算与相机控制</h3>
+<p>在 Web 开发中（如使用 Google Street View API 或 Mapbox SDK），核心挑战在于如何控制“虚拟相机”的参数，使其精准指向我们想要展示的目标。</p>
+<h4 id="231-field-of-view-fov">2.3.1 视场角 (Field of View, FOV)</h4>
+<p>FOV 决定了画面的“缩放程度”。</p>
+<ul>
+<li><strong>大 FOV (90° - 120°)</strong>：广角效果，能看到更多环境，但边缘畸变严重，物体显得远。</li>
+<li><strong>小 FOV (10° - 30°)</strong>：长焦效果，聚焦于特定建筑或标志，压缩空间感。</li>
+</ul>
+<h4 id="232-heading">2.3.2 方位角 (Heading) 计算</h4>
+<p>为了让街景相机自动“盯着”某个 POI，我们需要计算从<strong>相机位置</strong>到<strong>目标位置</strong>的大圆航线方位角。</p>
+<p>设定：</p>
+<ul>
+<li>相机位置 $C (\lambda_1, \phi_1)$</li>
+<li>目标位置 $T (\lambda_2, \phi_2)$</li>
+<li>其中 $\lambda$ 为经度，$\phi$ 为纬度（单位：弧度）。</li>
+</ul>
+<p>计算公式（Bearing Formula）：</p>
+<p>$$ \theta = \operatorname{atan2}(y, x) $$</p>
+<p>$$ y = \sin(\lambda_2 - \lambda_1) \cdot \cos(\phi_2) $$
+$$ x = \cos(\phi_1) \cdot \sin(\phi_2) - \sin(\phi_1) \cdot \cos(\phi_2) \cdot \cos(\lambda_2 - \lambda_1) $$
+最后将 $\theta$ 从弧度转换为角度，并归一化到 $0^\circ \sim 360^\circ$。</p>
+<h4 id="233-pitch">2.3.3 俯仰角 (Pitch) 计算</h4>
+<p>这是初学者容易忽略的一点。街景相机通常位于车顶（约 2.5米 - 3米高）。</p>
+<ul>
+<li>如果要看地面（如斑马线），Pitch 应为负值。</li>
+<li>如果要看高楼顶部，Pitch 应为正值。</li>
+</ul>
+<p>估算公式：
+假设目标物体的高度为 $H_{obj}$，相机高度为 $H_{cam}$，两点地面距离为 $D$。
+$$ \text{Pitch} \approx \arctan\left( \frac{H_{obj} - H_{cam}}{D} \right) $$</p>
+<blockquote>
+<p><strong>Rule of Thumb (参数策略)</strong>：
+在调用 API 展示某个 POI 时，<strong>不要</strong>仅仅传入 POI 的坐标。</p>
+<ol>
+<li>先用 POI 坐标搜索最近的<strong>全景 ID (PanoID)</strong>。</li>
+<li>获取该 PanoID 的真实坐标（这是相机位置）。</li>
+<li>利用<strong>相机位置</strong>和<strong>POI 坐标</strong>计算 Heading 和 Pitch。
+这样能确保用户看到的画面正对目标，而不是背对着目标看马路对面。</li>
+</ol>
+</blockquote>
+<hr />
+<h3 id="24-depth-map">2.4 进阶：深度图（Depth Map）与全景拓扑</h3>
+<h4 id="241">2.4.1 深度图：全景的“第三只眼”</h4>
+<p>Google Street View 等高级服务会在后台存储一张与全景图对应的<strong>深度图</strong>。这是一张灰度图或 Base64 编码的数组，每个像素的值代表该像素点距离相机的<strong>物理距离（米）</strong>。</p>
+<ul>
+<li><strong>应用场景 1：光标贴地</strong>。当你在街景中移动鼠标时，光标会随着建筑物表面变形（如贴在墙面上），这就是利用深度图计算出了鼠标射线与 3D 场景的交点。</li>
+<li><strong>应用场景 2：遮挡剔除</strong>。如果在街景中叠加 AR 导航箭头，利用深度图可以判断箭头是被建筑物遮挡还是浮在建筑物前面。</li>
+</ul>
+<h4 id="242-pano-graph">2.4.2 全景拓扑图 (Pano Graph)</h4>
+<p>街景不是孤立的点，而是一个<strong>有向图（Directed Graph）</strong>。</p>
+<ul>
+<li><strong>节点 (Node)</strong>：每一个全景拍摄点（PanoID）。</li>
+<li><strong>边 (Edge)</strong>：相邻全景点之间的连通关系。每条边包含连接方向（Heading）和说明（如“沿中山路向北”）。</li>
+</ul>
+<p>当用户点击画面上的“前进箭头”时，程序实际上是在遍历这个图结构，寻找与当前视线方向（Heading）夹角最小的那条边，加载下一个节点的数据。</p>
+<hr />
+<h2 id="3">3. 本章小结</h2>
+<ol>
+<li><strong>采集是基础</strong>：街景是多传感器（相机+GNSS+IMU+LiDAR）融合的产物，LiDAR 数据对于几何校正和深度感知至关重要。</li>
+<li><strong>投影是标准</strong>：<strong>等距长方投影（2:1）</strong> 是存储和交换的标准格式，但在渲染时通常会切片加载。</li>
+<li><strong>计算是关键</strong>：要实现从地图到街景的平滑跳转，必须掌握<strong>Heading（方位角）</strong> 和 <strong>Pitch（俯仰角）</strong> 的几何计算公式。</li>
+<li><strong>图结构</strong>：街景数据的组织形式是拓扑图，深度图赋予了图像三维属性，使得 AR 标注和测量成为可能。</li>
+</ol>
+<hr />
+<h2 id="4-gotchas">4. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="41-snapping">4.1 "Snapping"吸附）带来的位置漂移</h3>
+<ul>
+<li><strong>问题</strong>：你请求坐标 <code>(lat, lon)</code> 的街景，API 返回了图像，但当你把这个图像的坐标反向打点到地图上时，发现它偏离了原坐标 50 米。</li>
+<li><strong>原因</strong>：街景车只能在路上跑。API 会将你的请求坐标“吸附”到最近的轨迹线上。</li>
+<li><strong>调试</strong>：在进行精确标注（如在此坐标处放一个虚拟广告牌）时，必须使用 <strong>API 返回的吸附后坐标（Snapping Coordinate）</strong> 作为基准，而不是你原始请求的坐标，否则广告牌会“飘”在半空中或插入地下。</li>
+</ul>
+<h3 id="42">4.2 季节与时间维度的混乱</h3>
+<ul>
+<li><strong>问题</strong>：应用需要展示某店铺的现状，但街景显示该处还是工地。</li>
+<li><strong>原因</strong>：街景更新周期长（数月到数年）。</li>
+<li><strong>技巧</strong>：<ul>
+<li>检查 API 返回的 <code>imageDate</code> 字段。</li>
+<li>在 UI 上显著标注“拍摄于 YYYY 年 MM 月”。</li>
+<li>利用部分 API 提供的“时光机”功能（Time Machine），允许用户查历史影像，这在城市变迁分析中非常有价值。</li>
+</ul>
+</li>
+</ul>
+<h3 id="43">4.3 室内全景的“黑洞”</h3>
+<ul>
+<li><strong>问题</strong>：用户在街景中点击进入某商场，突然画面变黑或卡死。</li>
+<li><strong>原因</strong>：室外街景（由 Google/百度采集）与室内街景（通常由第三方商家上传）的<strong>坐标系或拼接质量</strong>往往存在差异。商家上传的全景图可能缺少地理参考（Geotag）或深度信息，导致查看器渲染失败。</li>
+<li><strong>调试</strong>：在代码中区分处理 <code>StreetViewSource.OUTDOOR</code> 和 <code>StreetViewSource.DEFAULT</code>，对于非官方数据源要有容错机制。</li>
+</ul>
+<h3 id="44-fov">4.4 视场角 (FOV) 导致的比例失调</h3>
+<ul>
+<li><strong>问题</strong>：为了看清远处的物体，将 FOV 设置得极小（如 10°）。</li>
+<li><strong>后果</strong>：用户稍微转动视角，画面就像坐过山车一样剧烈晃动（角速度被放大）。</li>
+<li><strong>建议</strong>：限制 FOV 的最小值，或者在缩小 FOV 时降低鼠标/触摸灵敏度。</li>
+</ul>
+<hr />
+<p><strong>导航</strong>：<a href="index.html">返回目录</a> | <a href="chapter9.html">上一章：从 nadir 到三维</a> | <a href="chapter11.html">下一章：室内地图构建与 BIM 融合</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter9.html" class="nav-link prev">← 第 9 章：从 nadir 到三维——立体像对、倾斜与点云</a><a href="chapter11.html" class="nav-link next">第 11 章：室内地图构建与 BIM 融合 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

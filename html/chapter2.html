@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 2 章：矢量地图基础与空间分析</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="2">第 2 章：矢量地图基础与空间分析</h1>
+<h2 id="1">1. 开篇</h2>
+<p>在第一章中，我们建立了“地球是一个椭球体”的认知，并确立了坐标参照系（CRS）作为定位的基石。然而，坐标点 merely 是数字海洋中的孤岛。为了在计算机中重现现实世界的复杂性——描绘蜿蜒的河流、不规则的地块、错综复杂的路网——我们需要一种能够精确描述离散对象的数字模型：<strong>矢量数据（Vector Data）</strong>。</p>
+<p>与照片式的栅格数据不同，矢量数据是<strong>面向对象</strong>的。它认为世界是由一个个独立的实体（Feature）组成的。本章将深入矢量数据的“解剖学结构”，从最基本的几何类型讲起，深入探讨文件存储的底层差异，剖析维持地图逻辑正确的“拓扑关系”，并详细拆解缓冲区、加分析等核心空间算法的几何原理。</p>
+<p><strong>学习目标</strong>：</p>
+<ol>
+<li><strong>深入理解几何模型</strong>：掌握点、线、面及其“多部件（Multi-part）”变体，理解“岛”与“洞”的存储逻辑。</li>
+<li><strong>掌握数据格式本质</strong>：透彻理解 Shapefile 的文件构造与局限，对比 GeoJSON 与 GeoPackage 的现代优势。</li>
+<li><strong>领会拓扑的重要性</strong>：识别并理解悬挂节点、自相交、细长碎部（Sliver）等拓扑错误。</li>
+<li><strong>精通空间分析逻辑</strong>：掌握缓冲区（Buffer）、叠置（Overlay）、空间连接（Spatial Join）的数学逻辑与应用场景。</li>
+</ol>
+<hr />
+<h2 id="2_1">2. 文字论述</h2>
+<h3 id="21">2.1 矢量数据的解剖学：几何与属性</h3>
+<p>矢量数据模型（Vector Data Model）将地理空间实体抽象为<strong>几何（Geometry）</strong>与<strong>属性（Attributes）</strong>的结合体。</p>
+<h4 id="211-geometry-primitives">2.1.1 几何基元（Geometry Primitives）</h4>
+<p>OGC（开放地理空间联盟）定义了简单的要素规范（Simple Feature Access），构成了所有 GIS 软件的基石除了基本的点线面，理解<strong>多部件（Multi-part）</strong>几何至关重要。</p>
+<ol>
+<li>
+<p><strong>点 (Point)</strong></p>
+<ul>
+<li><strong>定义</strong>：0 维几何，由一组坐标 $(x, y)$ 或 $(x, y, z)$ 确定。</li>
+<li><strong>多点 (MultiPoint)</strong>：一行记录对应多个点。例如，“某连锁便利店的所有分店”作为一个整体要素存储。</li>
+</ul>
+</li>
+<li>
+<p><strong>线 (LineString / Polyline)</strong></p>
+<ul>
+<li><strong>定义</strong>：1 维几何，由一系列有序的<strong>节点 (Vertices)</strong> 连接而成。</li>
+<li><strong>方向性</strong>：线是有方向的（从起点 StartNode 到终点 EndNode）。这对于模拟水流、交通流向至关重要。</li>
+<li><strong>多线 (MultiLineString)</strong>：例如“一条河流”可能中间断流，或者由多条支流组成，但在属性表中仍视为同一条河。</li>
+</ul>
+</li>
+<li>
+<p><strong>面 (Polygon)</strong></p>
+<ul>
+<li><strong>定义</strong>：2 维几何，由一个或多个闭合的<strong>线性环 (Linear Ring)</strong> 组成。</li>
+<li><strong>外环与内环</strong>：这是面要素最复杂的概念。一个多边形由一个<strong>外环 (Exterior Ring)</strong> 和零个或多个<strong>内环 (Interior Rings)</strong> 组成。内环即为“洞”。<ul>
+<li><em>例子</em>：一个湖泊（外环）中间有一个岛屿（岛屿本身是陆地，不属于湖泊多边形，所以在湖泊多边形中表现为一个“洞”）。</li>
+</ul>
+</li>
+<li><strong>多面 (MultiPolygon)</strong>：例如“日本”或“菲律宾”这样的群岛国家，由成千上万个分离的岛屿组成，但在数据库中，它是<strong>一行</strong>记录，对应一个 MultiPolygon。</li>
+</ul>
+</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>   [Polygon with Hole]              [MultiPolygon]
+
+      ___________                    ______      ___
+     /           \                  /      \    /   \
+    /   Ext.      \                / Part 1 \  / Part\
+   /    Ring       \              /__________\ \  2  /
+  /     _____       \                           \___/
+ |     | Int.|       |            (One Feature ID)
+ |     | Ring|       |
+ |     |_____|       |
+ \                   /
+  \_________________/
+</code></pre></div>
+
+<h4 id="212-attribute-table">2.1.2 属性表（Attribute Table）</h4>
+<p>属性是非空间信息，通常以关型数据库表的形式存在。每一行（Row）对应一个几何实体，每一列（Column）对应一个字段。</p>
+<ul>
+<li><strong>连接关键</strong>：几何与属性通常通过唯一的 <code>FeatureID</code> (FID) 绑定。</li>
+<li><strong>数据类型</strong>：包含整型、浮点型、字符串、日期等。</li>
+</ul>
+<h3 id="22">2.2 数据格式大比拼：从历史包袱到现代标准</h3>
+<h4 id="a-shapefile-shp">A. Shapefile (.shp) —— 不死的传奇与噩梦</h4>
+<p>由 ESRI 在 90 年代初推出。它不是一个文件，而是一组文件（通常 3 到 8 个）。</p>
+<ul>
+<li><code>.shp</code>: 存储几何图形。</li>
+<li><code>.shx</code>: 几何图形的索引（用于快速跳转）。</li>
+<li><code>.dbf</code>: dBase 格式存储属性表（这是最大的痛点）。</li>
+<li><code>.prj</code>: 存储投影信息（WKT 文本）。</li>
+</ul>
+<blockquote>
+<p><strong>致命局限</strong>：</p>
+<ol>
+<li><strong>字段名截断</strong>：<code>.dbf</code> 限制字段名最长 <strong>10 个字符</strong>（例如 <code>construction_year</code> 会变成 <code>constructi</code>）。</li>
+<li><strong>文件大小</strong>：<code>.shp</code> 和 <code>.dbf</code> 最大支持 <strong>2GB</strong>。</li>
+<li><strong>编码地狱</strong>：<code>.dbf</code> 默认没有明确的编码声明，常导致中文乱码（GBK vs UTF-8）。</li>
+<li><strong>NULL 值</strong>：很难区分“0”和“NULL”。</li>
+</ol>
+</blockquote>
+<h4 id="b-geojson-json-web">B. GeoJSON (.json) —— Web 的宠儿</h4>
+<p>基于 JSON 的纯文本格式，人类可读。</p>
+<ul>
+<li><strong>结构</strong>：由 <code>FeatureCollection</code> 包含 <code>Features</code>，每个 Feature 包含 <code>geometry</code> 和 <code>properties</code>。</li>
+<li><strong>优点</strong>：Web 原生支持（JavaScript 能够直接解析），无字段长度限制，强制 UTF-8。</li>
+<li><strong>缺点</strong>：体积臃肿（冗余的括号和键名）。不适合存储海量数据（解析慢）。</li>
+</ul>
+<h4 id="c-geopackage-gpkg">C. GeoPackage (.gpkg) —— 现代的终结者</h4>
+<p>基于 <strong>SQLite</strong> 数据库的单文件容器，OGC 标准。</p>
+<ul>
+<li><strong>优点</strong>：<ul>
+<li><strong>单文件</strong>：没有乱七八糟的同名文件。</li>
+<li><strong>无限制</strong>：无 2GB 限制，无 10 字符字段名限制。</li>
+<li><strong>高性能</strong>：内置 R-Tree 空间索引，读取速度极快。</li>
+<li><strong>混合存储</strong>：同一个文件可以存矢量、栅格瓦片甚至非空间表。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Rule of Thumb (经验法则)</strong>：</p>
+<ul>
+<li><strong>做分析、存数据</strong>：永远首选 <strong>GeoPackage</strong>。</li>
+<li><strong>Web 前端展示/API 传输</strong>：使用 <strong>GeoJSON</strong>（如果是大数据量传输，考虑 PBF/MVT 矢量瓦片，这将在后续章节介绍）。</li>
+<li><strong>客户交付</strong>：如果客户老派，给 Shapefile（记得处理字段名缩写）；否则给 GeoPackage。</li>
+</ul>
+</blockquote>
+<h3 id="23-topology">2.3 拓扑关系 (Topology)：数据的逻辑骨架</h3>
+<p>拓扑不仅仅是几何位置，它定义了空间对象之间的<strong>连接</strong>、<strong>邻接</strong>和<strong>包含</strong>关系。拓扑关系在地图发生弹性形变（如投影转换）时保持不变。</p>
+<h4 id="_1">为什么需要拓扑？</h4>
+<p>如果只是画图，不需要拓扑。但如果要做分析：</p>
+<ul>
+<li><strong>导航</strong>：如果道路在十字路口没有打断并共享节点，导航引擎会认为这里不能转弯（因为线不连通）。</li>
+<li><strong>统计</strong>：如果两个行政区划面之间有重叠，计算总面积时就会重复统计。</li>
+</ul>
+<h4 id="_2">常见的拓扑错误与图示</h4>
+<ol>
+<li><strong>悬挂节点 (Dangle / Overshoot / Undershoot)</strong>
+    线段超出了目线或未到达目标线。</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>Target Line:  ───────────────
+Overshoot:           |
+                     | (Crosses over)
+                  ───|───
+
+Undershoot:          |
+                     | (Gap)
+                     |
+</code></pre></div>
+
+<ol start="2">
+<li><strong>自相交 (Self-intersection / Bowtie)</strong>
+    多边形的边界线自己切自己，形成类似领结的形状。这在几何计算（如面积）时会导致数学错误。</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>   Geometry:      / \
+                 /   \
+                /  X  \   &lt;-- Intersection Point
+               / /   \ \
+              /_/     \_\
+</code></pre></div>
+
+<ol start="3">
+<li><strong>碎部多边形 (Slivers)</strong>
+    两个本该公共边的多边形之间，因为数字化误差，产生细长的重叠或空隙。</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>   Poly A      / \ / \      Poly B
+  ____________/   X   \_____________
+              \_______/
+             (Tiny gap or overlap)
+</code></pre></div>
+
+<h3 id="24">2.4 核心空间分析逻辑</h3>
+<h4 id="a-buffering">A. 缓冲区分析 (Buffering)</h4>
+<p>不仅是画个圈。缓冲区的本质是 Minkowski Sum（闵可夫斯基和）。
+对于点 $P$ 和半径 $r$，缓冲区是圆。对于复杂多边形，它是多边形边界上每个点做圆后的包络线。</p>
+<ul>
+<li><strong>端点样式 (End Cap Style)</strong>：在线的末端，是圆头 (Round)、平头 (Flat/Butt) 还是方头 (Square)？这对路网分析很重要。</li>
+<li><strong>侧边缓冲 (Single-sided Buffer)</strong>：只在道路左侧做缓冲（例如分析左侧扩建影响）。</li>
+</ul>
+<h4 id="b-overlay-operations">B. 叠置分析 (Overlay Operations)</h4>
+<p>基于集合论的布尔运算。</p>
+<ul>
+<li><strong>裁剪 (Clip)</strong>: $Result = Input \cap ClipLayer$。<ul>
+<li>只保留几何形状，<strong>属性不融合</strong>。仅仅是物理形状的切割。</li>
+</ul>
+</li>
+<li><strong>相交 (Intersect)</strong>: $Result = LayerA \cap LayerB$。<ul>
+<li>保留几何重叠部分，且<strong>属性表融合</strong>（Join）。</li>
+</ul>
+</li>
+<li><strong>联合 (Union)</strong>: $Result = LayerA \cup LayerB$。<ul>
+<li>保留所有几何，重叠部分会被切割出来成为独立要，属性包含两者。</li>
+</ul>
+</li>
+<li><strong>擦除 (Difference)</strong>: $Result = LayerA - LayerB$。</li>
+</ul>
+<h4 id="c-spatial-join">C. 空间连接 (Spatial Join)</h4>
+<p>GIS 中最强大的工具之一。将“位置关系”转化为“属性关联”。</p>
+<ul>
+<li><strong>点在面内 (Point in Polygon)</strong>：给“学校”点数据加上“所在城市”的属性。</li>
+<li><strong>总结式连接 (Summary Join)</strong>：<ul>
+<li>问题：每个行政区有多少个学校？学校总人数多少？</li>
+<li>操作：将“学校”（多）Join 到“行政区”（一）。</li>
+<li>逻辑：<code>Count</code>（计数），<code>Sum</code>（求和）。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="3">3. 本章小结</h2>
+<ol>
+<li><strong>数据模型</strong>：矢量数据由<strong>几何</strong>（点、线、面及其多部件变体）和<strong>属性</strong>（表格数据）组成。</li>
+<li><strong>格式进化</strong>：<strong>GeoPackage</strong> 是现代 GIS 交互与存储的标准容器，它解决了 <strong>Shapefile</strong> 的字段截断、大小限制和编码问题。Web 开发则依赖 <strong>GeoJSON</strong>。</li>
+<li><strong>拓扑完整性</strong>：高质量的地图不仅看起来没问题，逻辑上也不能有<strong>悬挂</strong>、<strong>自相交</strong>和<strong>缝隙</strong>。拓扑检查是数据入库前的必修课。</li>
+<li><strong>空间逻辑</strong>：<ul>
+<li><strong>缓冲区</strong>描述影响范围。</li>
+<li><strong>叠置分析</strong>（裁剪/相交）处理层与层的几何关系。</li>
+<li><strong>空间连接</strong>利用位置关系进行数据融合与统计。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="4-gotchas">4. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1_1">💀 陷阱 1：投影单位导致的“巨大”或“微小”缓冲区</h3>
+<ul>
+<li><strong>现象</strong>：设定 500 缓冲距离，结果生成了覆盖全球的面。</li>
+<li><strong>原因</strong>：数据处于 <strong>WGS84 (EPSG:4326)</strong> 地理坐标系，单位是<strong>度</strong>。GIS 软件机械地执行了 “500 度”的缓冲。</li>
+<li><strong>解决方案</strong>：先将数据 <code>Reproject</code> 到投影坐标系（如 UTM 或 Web Mercator），使单位变为<strong>米</strong>，再做缓冲。</li>
+</ul>
+<h3 id="2csv">💀 陷阱 2：CSV 导入时的经纬度翻转</h3>
+<ul>
+<li><strong>现象</strong>：点落在了南极或索马里海域（本来应该在中国）。</li>
+<li><strong>原因</strong>：混淆了 <code>Lat/Lon</code> 和 <code>X/Y</code>。</li>
+<li><strong>记忆口诀</strong>：<ul>
+<li><strong>X = Longitude (经度)</strong>：在地图上横向移动，范围 -180 ~ 180。</li>
+<li><strong>Y = Latitude (纬度)</strong>：在地图上纵向移动，范围 -90 ~ 90。</li>
+<li>大部分 GIS 软件导入需要 <strong>X, Y</strong> 顺序，而 Google Maps API 等常说 <strong>Lat, Lon</strong>。<strong>Lat is Flat</strong> (纬度是横线，对应 Y 轴)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3multipolygon-polygon">💀 陷阱 3：MultiPolygon 变 Polygon 的丢失</h3>
+<ul>
+<li><strong>现象</strong>：对一个国家做处理后，发现岛屿都丢了，只剩下最大的陆地块。</li>
+<li><strong>原因</strong>：某些陈旧的处理函数或格式转换（如转为仅支持单一部件的旧格式）强行将 <code>MultiPolygon</code> 拆解或只保留了面积最大的部分（Cast to Single）。</li>
+<li><strong>调试</strong>：始终检查几何类型是否为 <code>Multi</code>，并在处理时允许 Multipart 几何。</li>
+</ul>
+<h3 id="4shapefile">💀 陷阱 4：Shapefile 编码灾难</h3>
+<ul>
+<li><strong>现象</strong>：打开 Shapefile 属性表，中文全是 <code>Åäö...</code> 乱码。</li>
+<li><strong>原因</strong>：<code>.cpg</code> 文件缺失，或者软件默认用 System Locale (GBK) 去读 UTF-8 的数据（反之亦然）。</li>
+<li><strong>调试</strong>： QGIS 打开时显式指定 Encoding（如 GBK, UTF-8, Big5）。保存时<strong>务必</strong>转存为 UTF-8 的 GeoPackage 以永绝后患。</li>
+</ul>
+<h3 id="5-ring-orientation">💀 陷阱 5：环的方向 (Ring Orientation)</h3>
+<ul>
+<li><strong>现象</strong>：在某些 WebGL 引擎或数据库中，多边形不显示，或者显示为“除了这个多边形以外，整个地球都被填充了”。</li>
+<li><strong>原因</strong>：根据 OGC Simple Feature 标准，外环应为<strong>逆时针 (CCW)</strong>，内环为<strong>顺时针 (CW)</strong>。如果方向反了，渲染引擎可能将其理解为“这是一个包含了整个地球、挖掉了中间一小块”的超大多边形。</li>
+<li><strong>调试</strong>：使用 <code>Force Right-Hand-Rule</code> 或 <code>Repair Geometry</code> 工具修复顶点的缠绕顺序。</li>
+</ul>
+<hr />
+<p><a href="chapter1.html">&lt; 上一章：地图世界观</a> | <a href="chapter3.html">下一章：栅格影像与遥感入门 &gt;</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter1.html" class="nav-link prev">← 第 1 章：地图世界观——从地球到屏幕</a><a href="chapter3.html" class="nav-link next">第 3 章：栅格影像与遥感入门（含多光谱） →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

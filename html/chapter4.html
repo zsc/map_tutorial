@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 4 章：DEM 与地形分析基础</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="4-dem">第 4 章：DEM 与地形分析基础</h1>
+<p><strong>——赋予地图第三个维度：从像素矩阵到起伏世界</strong></p>
+<p>在前几章中，我们构建的地图世界虽然色彩斑斓，但它本质上是平坦的“纸面”世界。然而，现实世界充满了起伏：洪水会顺着沟谷流淌，无线电信号会被山脉阻挡，阳光会在晨昏时分投下长长的阴影。</p>
+<p>本章将引入 GIS 中至关重要的 <strong>Z 轴</strong>信息。我们将深入剖析数字高程模型（DEM）的内核，从卫星雷达的成像原理讲到数学微分在地形分析中的应用。我们不仅要学会“看”地形，更要学会“算”地形——计算坡度以评估滑坡风险，计算可视域以规划基站，计算流向以模拟洪水。</p>
+<p><strong>本章学习目标：</strong></p>
+<ol>
+<li><strong>深度辨析</strong>：从采集原理层面理解 DEM、DSM、DTM 的本质差异转换难点。</li>
+<li><strong>数据鉴赏</strong>：全面掌握 SRTM、ASTER、ALOS、Copernicus GLO-30 等全球数据的优缺点与适用场景。</li>
+<li><strong>算法原理</strong>：深入理解坡度（Slope）、坡向（Aspect）、山体阴影（Hillshade）及等高线（Contour）背后的数学逻辑。</li>
+<li><strong>水文入门</strong>：理解基于 DEM 的流域提取工作流（填洼 -&gt; 流向 -&gt; 累积量）。</li>
+<li><strong>避坑指南</strong>：掌握投影失真、垂直基准面冲突等高阶问题的解决方案。</li>
+</ol>
+<hr />
+<h2 id="41">4.1 核心概念进阶：不仅是名词的差异</h2>
+<p>在入门阶段，我们知道 DSM 有树，DTM 没树。但在实际生产中，理解数据的<strong>采集来源</strong>对于正确选择模型至关重要。</p>
+<h3 id="1">1. 三种模型的物理本质</h3>
+<ul>
+<li>
+<p><strong>DSM (Digital Surface Model，数字表面模型)</strong></p>
+<ul>
+<li><strong>物理意义</strong>：传感器的“第一反射面”。对于雷达卫星，它是雷达波触碰到的树冠或屋顶；对于摄影测量，它是照片匹配出的视觉最上层。</li>
+<li><strong>数据特征</strong>：城市区域呈现“乐高积木”般的突起；在森林区域表现为嘈杂的树冠纹理。</li>
+<li><em>典型来源</em>：无人机摄影测量、LiDAR 首波回波、InSAR（干涉雷达）。</li>
+</ul>
+</li>
+<li>
+<p><strong>DTM (Digital Terrain Model，数字地形模型)</strong></p>
+<ul>
+<li><strong>物理意义</strong>：去除所有非地面物体后的“裸土”表面。</li>
+<li><strong>构建难度</strong>：卫星很难直接拍到 DTM。通常需要通过算法（滤波）从 DSM 中“刨除”房屋和树木，或者利用 LiDAR 的激光穿透树叶缝隙的特性（末次回波）来获取。</li>
+<li><em>关键应用</em>：土方量计算（挖填方）、洪水淹没模拟（这是唯一正确的模型）。</li>
+</ul>
+</li>
+<li>
+<p><strong>DEM (Digital Elevation Model，数字高程模型)</strong></p>
+<ul>
+<li><strong>学术定义</strong>：地表高程的离散化数学表达。</li>
+<li><strong>工程惯例</strong>：在开源全球数据（如 SRTM）中，DEM 通常指的是一种“未完全过滤的混合物”。由于雷达波有穿透性（C波段穿透浅，L波段穿透深），SRTM 测得的高度往介于树冠顶端和地面之间，被称为“相位中心高度”。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ascii-view">2. 形象化图解 (ASCII View)</h3>
+<p>想象一下从侧面切开地球：</p>
+<div class="codehilite"><pre><span></span><code>       [森林区]                 [城市区]                 [湖泊]
+   /\  /\  /\  /\             +-------+
+  /  \/  \/  \/  \            |       |
+_/_DS_M_Top_Surfac\e__________|_______|_______________~~~~~~~_ &lt;-- DSM
+ |   ||  ||  ||   |           |       |               ~ Water~
+ | T |r  |e  |e   |           | Bldg  |               ~ Body ~
+_|___||__||__||___|___________|_______|_______________~~~~~~~_ &lt;-- DTM
+ \                    Ground                          /
+  \__________________________________________________/
+</code></pre></div>
+
+<blockquote>
+<p><strong>Rule-of-Thumb (经验法则)</strong>：</p>
+<ul>
+<li><strong>做 3D 城市展示</strong>：必须用 <strong>DSM</strong>。如果把卫星影像贴在 DTM 上，高楼会像融化的冰淇淋一样塌陷在地面上。</li>
+<li><strong>做道路选线</strong>：必须用 <strong>DTM</strong>。你不能把路修在树顶上。</li>
+<li><strong>全球尺度分析</strong>：通常只能获取到 <strong>DEM</strong>（混合体）。在使用 SRTM 做亚马逊雨林的水文分析时要极为小心，因为河道实际上可能比测得的“树冠高度”低几十米，形成虚假的阻断。</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="42">4.2 全球地形数据源深度评测</h2>
+<p>并非所有 30米分辨率的数据都是一样的。数据的质量取决于传感器类型（光学 vs 雷达）和后处理水平。</p>
+<p>| 数据集 | 核心技术 | 优点 (Pros) | 缺点 (Cons) | 推荐指数 |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">数据集</th>
+<th style="text-align: left;">核心技术</th>
+<th style="text-align: left;">优点 (Pros)</th>
+<th style="text-align: left;">缺点 (Cons)</th>
+<th style="text-align: left;">推荐指数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SRTM v3</strong></td>
+<td style="text-align: left;">雷达干涉 (InSAR, C-Band)</td>
+<td style="text-align: left;"><strong>行业基准</strong>。数据一致性极好，包含水体掩膜。空洞已用其他数据填充。</td>
+<td style="text-align: left;">分辨率仅 30m/90m。雷达阴影区会有插值痕迹。时间久远（2000年采集）。</td>
+<td style="text-align: left;">⭐⭐⭐⭐ (经典)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ASTER GDEM v3</strong></td>
+<td style="text-align: left;">光学立体像对 (Stereo)</td>
+<td style="text-align: left;">覆盖范围极广（达 83°N/S）。</td>
+<td style="text-align: left;"><strong>噪点多</strong>（看起来像麻子脸）。受云层影响大。在平坦区域会有虚假起伏（Artifacts）。</td>
+<td style="text-align: left;">⭐⭐ (仅作补充)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>ALOS World 3D (AW3D30)</strong></td>
+<td style="text-align: left;">光学立体像对</td>
+<td style="text-align: left;"><strong>垂直精度高</strong>。源数据是 5m 分辨率下采样而来，细节保留好。</td>
+<td style="text-align: left;">作为光学数据，仍偶有云层遮挡造成的坏点。部分版本有许可限制。</td>
+<td style="text-align: left;">⭐⭐⭐⭐ (高精)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Copernicus DEM (GLO-30)</strong></td>
+<td style="text-align: left;">雷达 (TanDEM-X)</td>
+<td style="text-align: left;"><strong>当前最强</strong>。基于德国 TanDEM-X 任务，相比 SRTM 更清晰，噪点更少，时效性更新。</td>
+<td style="text-align: left;">某些敏感区域（部分国家）可能不提供 30m 版本，只有 90m。</td>
+<td style="text-align: left;">⭐⭐⭐⭐⭐ (首选)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NASADEM</strong></td>
+<td style="text-align: left;">SRTM 再处理</td>
+<td style="text-align: left;">SRTM 的现代化重制版，融合了 ICESat 激光测高数据进行校正。</td>
+<td style="text-align: left;">本质上还是 2000 年的地形。</td>
+<td style="text-align: left;">⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>什么是“空洞” (Voids)？</strong>
+雷达在遇到极其陡峭的山体背坡时，接收不到回波，形成数据空洞。早期的 SRTM 充满了空洞。现在的发布版本（v3, v4）通常使用“空洞填充算法”（例如用 ASTER 数据填补 SRTM 的洞）修复了这些问题。</p>
+</blockquote>
+<hr />
+<h2 id="43">4.3 地形分析算法：打开数学的黑盒</h2>
+<p>所有的地形分析，本质上都是在一个 <strong>3x3 的移动窗口（Kernel）</strong> 上进行的数学运算。</p>
+<p>设中心像素为 $e_5$，单元格大小为 $L$（米）。</p>
+<p>$$
+\begin{bmatrix}
+e_1 &amp; e_2 &amp; e_3 \\
+e_4 &amp; e_5 &amp; e_6 \\
+e_7 &amp; e_8 &amp; e_9
+\end{bmatrix}
+$$</p>
+<h3 id="1-slope-aspect-horns-algorithm">1. 坡度 (Slope) 与 坡向 (Aspect) —— 霍恩算法 (Horn's Algorithm)</h3>
+<p>为了计算中心点表面的法向量，我们需要估算东西方向（dz/dx）和南北方向（dz/dy）的变化率。霍恩算法通过加权，赋予中心行列更高的权重，以平滑噪点：</p>
+<ul>
+<li>
+<p><strong>东西变化率</strong> (West-to-East):
+    $$ [dz/dx] = \frac{(e_3 + 2e_6 + e_9) - (e_1 + 2e_4 + e_7)}{8 \times L} $$</p>
+</li>
+<li>
+<p><strong>南北变化率</strong> (South-to-North):
+$$ [dz/dy] = \frac{(e_7 + 2e_8 + e_9) - (e_1 + 2e_2 + e_3)}{8 \times L} $$</p>
+</li>
+<li>
+<p><strong>坡度 (Slope)</strong>：
+$$ \text{Slope (radians)} = \arctan(\sqrt{[dz/dx]^2 + [dz/dy]^2}) $$
+<em>应用</em>：当 Slope &gt; 30度时，通常不适合建筑；Slope &lt; 1% 时，排水困难。</p>
+</li>
+<li>
+<p><strong>坡向 (Aspect)</strong>：
+$$ \text{Aspect} = \text{atan2}([dz/dy], -[dz/dx]) $$
+<em>结果</em>：0-360度的方位角。
+    <em>应用</em>：农业中寻找“阳坡”（朝南/朝东）种植喜光作物；积雪分析中寻找“阴坡”。</p>
+</li>
+</ul>
+<h3 id="2-hillshade">2. 山体阴影 (Hillshade) —— 欺骗眼睛的艺术</h3>
+<p>Hillshade 并不改变地图数据，它是一种<strong>可视化技术</strong>。它计算每个像素面对假想光源的“受光量”。</p>
+<p>公式逻辑：
+$$ \text{Brightness} \propto \cos(\text{Incident Angle}) $$
+入射角由<strong>太阳位置</strong>（方位角 $Az$，高度角 $Alt$）和<strong>地面法向量</strong>（坡度 $S$，坡向 $A$）共同决定。
+$$ \text{Hillshade} = 255 \times [ (\cos(Zenith) \cdot \cos(S)) + (\sin(Zenith) \cdot \sin(S) \cdot \cos(Az - A)) ] $$
+<em>(注：Zenith = 90° - Alt)</em></p>
+<blockquote>
+<p><strong>制图专家技巧 (Pro Tip)</strong>：</p>
+<ul>
+<li><strong>标准光源</strong>：通常设为 Azimuth = 315° (西北), Altitude = 45°。这是因为人类习惯光源来自“左上角”。如果设为东南光源，地形看起来会产生“反转错觉”（山脉看起来像峡谷）。</li>
+<li><strong>多向晕渲 (Multidirectional Hillshade)</strong>：传统 Hillshade 会让背光面死黑。现代算法会计算来自不同方向的光源并加权融合，使得地形细节在阴影中依然可见（类似 HDR 效果）。</li>
+</ul>
+</blockquote>
+<h3 id="3-contours">3. 等高线 (Contours)</h3>
+<p>等高线是将栅格 DEM 转化为矢量线（LineString）的过程。</p>
+<ul>
+<li>原理：将栅格看作连续曲面，寻找数值等于特定值（如 100m, 200m）的位置连线。</li>
+<li><strong>陷阱</strong>：直接从原始 SRTM 生成的等高线通常锯齿严重且破碎。</li>
+<li><strong>处理技巧</strong>：<strong>先平滑，后提取</strong>。先对 DEM 进行高斯模糊（Gaussian Blur）或重采样，再提取等高线，线条会更加圆润自然。</li>
+</ul>
+<hr />
+<h2 id="44">4.4 水文分析基础：让水流起来</h2>
+<p>基于 DEM 的水文分析是 GIS 的皇冠明珠之一。其核心思想是：<strong>水往低处流</strong>。</p>
+<p><strong>工作流：</strong></p>
+<ol>
+<li><strong>填洼 (Fill Sinks)</strong>：<ul>
+<li><em>问题</em>：真实世界很少有完全封闭的坑，但 DEM 噪点会产生大量“假坑”。水流到这里就断了。</li>
+<li><em>操作</em>：将坑洼的高程强行抬高，直到水能流出去。</li>
+</ul>
+</li>
+<li><strong>流向计算 (Flow Direction)</strong>：<ul>
+<li><em>D8 算法</em>：判断中心像素周围 8 个邻居哪个最低，水就流向哪里。用数字编码（1=东, 2=东南...）表示方向。</li>
+</ul>
+</li>
+<li><strong>汇流累积量 (Flow Accumulation)</strong>：<ul>
+<li><em>原理</em>：统计有多少个上游格子流经当前格子。</li>
+<li><em>阈值切分</em>：当累积量 &gt; 1000（经验值）时，我们认为这里形成了一条小溪。</li>
+</ul>
+</li>
+<li><strong>流域提取 (Watershed Delineation)</strong>：<ul>
+<li>给定一个出水口（Pour Point），反向追踪所有流向该点的像素，得到集水区边界。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="45">4.5 本章小结</h2>
+<ul>
+<li><strong>维度升级</strong>：DEM 赋予了地图 Z 轴。从数据结构上看，它是一张单波段的灰度图，但每个像素值代表物理高度。</li>
+<li><strong>数据选择</strong>：优先选择 <strong>Copernicus DEM</strong> 或 <strong>SRTM</strong>。做城市级应用（如视域分析）需寻找 DSM；做水文分析必须尽可能近 DTM。</li>
+<li><strong>数学基础</strong>：坡度和坡向是高程场的一阶导数。Hillshade 是基于光照物理模型的渲染。</li>
+<li><strong>应用广泛</strong>：从简单的“画出好看的地形图”到复杂的“洪水淹没模拟”，DEM 都是底座。</li>
+</ul>
+<hr />
+<h2 id="46-gotchas">4.6 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1-the-z-factor-issue">1. 致命的单位不统一 (The Z-Factor Issue)</h3>
+<p>这是 DEM 处理中 <strong>Top 1</strong> 的错误。</p>
+<ul>
+<li><strong>场景</strong>：你的 DEM 是经纬度坐标（WGS84, EPSG:4326）。</li>
+<li><strong>错误</strong>：直接计算坡度。</li>
+<li><strong>后果</strong>：X/Y 单位是“度”，Z 单位是“米”。计算机计算 $Rise/Run$ 时，会把 1 度当作 1 米处理。实际上 1 度约等于 111,000 米。结果是计算出的坡度几乎全是 89.99 度，Hillshade 一片漆黑或全白。</li>
+<li><strong>解决方案</strong>：<ul>
+<li><strong>方案 A（推荐）</strong>：先将 DEM <strong>重投影</strong>到投影坐标系（如 UTM 或 Web Mercator），确保 X,Y,Z 单位均为米。</li>
+<li><strong>方案 B</strong>：设置 Z-factor（垂直夸张因子）。在赤道附近设为 $0.000009$ 左右（$1/111320$），但随着纬度变化，这个系数会变，极不准确。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ellipsoid-vs-geoid">2. 垂直基准面的困惑 (Ellipsoid vs. Geoid)</h3>
+<ul>
+<li><strong>场景</strong>：你拿着高精度 GPS (RTK) 测得山顶高度为 1050米，但 DEM 显示 1000米。</li>
+<li><strong>原因</strong>：<ul>
+<li>GPS 默认测量的是<strong>椭球高</strong>（相对于 WGS84 椭球面的纯数学高度）。</li>
+<li>大部分 DEM（如 SRTM）记录的是<strong>正高/海拔</strong>（相对于 EGM96 大地水准面，即平均海平面）。</li>
+<li>两者在某些地区相差可达 100米（大地水准面差距 Geoid Undulation）。</li>
+</ul>
+</li>
+<li><strong>对策</strong>：在进行高精度融合前，必须使用 Geoid 模型（如 EGM96 或 EGM2008）进行高程转换。</li>
+</ul>
+<h3 id="3-nodata">3. NoData 的破坏力</h3>
+<ul>
+<li><strong>场景</strong>：做地形统计平均值时，结果异常偏低。</li>
+<li><strong>原因</strong>：海洋或边界外的区域通常被赋值为 <code>-32768</code> 或 <code>-9999</code>。如果程序没把这些当成“空值”而当成“负三万米”参与计算，结果就会错误。</li>
+<li><strong>对策</strong>：加载据时显式声明 <code>nodata</code> 值，或者在计算前建立掩膜（Mask）。</li>
+</ul>
+<h3 id="4-pixel-registration">4. 像素偏移 (Pixel Registration)</h3>
+<ul>
+<li><strong>细节</strong>：像素的坐标是指向<strong>中心 (Center)</strong> 还是<strong>左上角 (Corner)</strong>？</li>
+<li><strong>影响</strong>：不同软件标准不同。如果混用，可能导致地形整体偏移半个像素（对于 30m 数据就是 15米误差）。在做高精度差分分析时，这 15米足以导致错误的结论（例如误判山体移动）。</li>
+</ul>
+<hr />
+<p><a href="chapter3.html">&lt; 上一章：栅格影像与遥感入门</a> | <a href="index.html">回到目录</a> | <a href="chapter5.html">下一章：在线底图与天地图生态 &gt;</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter3.html" class="nav-link prev">← 第 3 章：栅格影像与遥感入门（含多光谱）</a><a href="chapter5.html" class="nav-link next">第 5 章：在线底图与天地图生态 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

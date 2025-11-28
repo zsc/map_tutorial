@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>全球地图：矢量、影像、地形</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item active" >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="_1">全球地图：矢量、影像、地形</h1>
+<p><strong>——从原理到实践的多尺度地图构建指南</strong></p>
+<blockquote>
+<p>本课程从“全球视角的正射影像（nadir）”出发，一路走到“街景与室内地图”，
+结合 DEM、BIM、天地图、吉林一号、NOAA、Sentinel、SAR、多光谱等多源数据，
+完整搭建一套“全球—城市—街景—室内”的多尺度地图体系。</p>
+</blockquote>
+<hr />
+<h2 id="1">1. 课程定位</h2>
+<ul>
+<li>面向对象  </li>
+<li>想系统学习地图制作与空间数据处理的 GIS / 遥感 / 规划 / 测绘从业者与学生  </li>
+<li>需要为产品或业务打造地图底图、街景和室内地图的工程师、数据科学家  </li>
+<li>
+<p>对全球遥感数据与三维重建有兴趣的开发者和爱好者  </p>
+</li>
+<li>
+<p>核心关键词  </p>
+</li>
+<li>矢量 / 栅格 / DEM / 地形分析  </li>
+<li>卫星影像：吉林一号全国一张图 / 全球一张图、NOAA、Sentinel、多光谱、SAR  </li>
+<li>在线地图：天地图、Google、OSM 等  </li>
+<li>街景：从 nadir 到街景、街景采集流程、Google Street View API 调用  </li>
+<li>室内地图 &amp; BIM：建筑信息模型与空间数据融合  </li>
+<li>Web 地图发布：XYZ / WMTS / 3D Tiles / Cesium 等  </li>
+</ul>
+<hr />
+<h2 id="2">2. 学习目标</h2>
+<p>完成本课程后，你将能够：</p>
+<ol>
+<li>理解全球地图中矢量与栅格、地形数据（DEM）的基本原理和存储方式  </li>
+<li>熟练使用天地图、吉林一号“全国一张图 / 全球一张图”、NOAA、Sentinel 等多源卫星数据  </li>
+<li>理解多光谱与 SAR 影像的基本概念及典型应用场景  </li>
+<li>掌握从 nadir 正射影像到三维模型再到街景图的核心流程  </li>
+<li>能够调用 Google Street View / 其他街景 API 获取和使用街景数据  </li>
+<li>掌握室内地图构建的基本思路，将 BIM 数据转换为可用的室内地图  </li>
+<li>能够将多尺度地图（全球 / 城市 / 街景 / 室内）发布为可交互的 Web 地图应用  </li>
+</ol>
+<hr />
+<h2 id="3">3. 课程结构（章节概览）</h2>
+<blockquote>
+<p>本课程组织为多章 markdown 文件：<br />
+<code>index.md</code>（本文件） + <code>chapter1.md</code> + <code>chapter2.md</code> + ...</p>
+</blockquote>
+<h3 id="1_1"><a href="chapter1.html">第 1 章：地图世界观——从地球到屏幕</a></h3>
+<ul>
+<li>地球形状、椭球与大地基准  </li>
+<li>投影、坐标参考系（WGS84, Web Mercator 等）  </li>
+<li>矢量 vs 栅格：数据结构与适用场景  </li>
+<li>全球地图常用分辨率与尺度概念（缩放级别 Zoom Level）  </li>
+<li>实战：在桌面 GIS（例如 QGIS）中加载全球底图与简单矢量数据  </li>
+</ul>
+<hr />
+<h3 id="2_1"><a href="chapter2.html">第 2 章：矢量地图基础与空间分析</a></h3>
+<ul>
+<li>点 / 线 / 面与属性表  </li>
+<li>常见格式：Shapefile, GeoJSON, GeoPackage 等  </li>
+<li>基础空间分析：缓冲区、叠加分析、裁剪、空间连接  </li>
+<li>拓扑关系与质量检查  </li>
+<li>实战：制作一幅简单的城市矢量地图（道路 + 建筑 + POI）  </li>
+</ul>
+<hr />
+<h3 id="3_1"><a href="chapter3.html">第 3 章：栅格影像与遥感入门（含多光谱）</a></h3>
+<ul>
+<li>栅格数据结构：分辨率、波段、瓦片  </li>
+<li>遥感基础概念：电磁波谱、多光谱 / 高光谱  </li>
+<li>常见栅格格式：GeoTIFF、Cloud Optimized GeoTIFF、瓦片金字塔（XYZ / TMS  </li>
+<li>典型指数：NDVI 等基础指数计算  </li>
+<li>实战：加载一景多光谱影像，做简单的假彩色合成与指数分析  </li>
+</ul>
+<hr />
+<h3 id="4-dem"><a href="chapter4.html">第 4 章：DEM 与地形分析基础</a></h3>
+<ul>
+<li>DEM / DSM / DTM 概念与差异  </li>
+<li>数据来源与常用数据集（如 SRTM、ASTER GDEM 等概念介绍）  </li>
+<li>地形分析：坡度、坡向、阴影（Hillshade）、可视域分析  </li>
+<li>DEM 与矢量数据叠加应用（如选址、洪水分析的简单示例）  </li>
+<li>实战：用 DEM 构建地形背景图，并生成地形晕渲图  </li>
+</ul>
+<hr />
+<h3 id="5"><a href="chapter5.html">第 5 章：在线底图与天地图生态</a></h3>
+<ul>
+<li>在线地图服务类型：XYZ / WMTS / WMS 基础  </li>
+<li>天地图简介与服务类型：矢量、影像、地形、注记  </li>
+<li>天地图坐标体系与投影注意事项  </li>
+<li>在桌面 GIS / Web 前端中调用天地图底图  </li>
+<li>实战：搭建一个以天地图为底图的简单 Web 地图页面  </li>
+</ul>
+<hr />
+<h3 id="6"><a href="chapter6.html">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</a></h3>
+<ul>
+<li>吉林一号卫星星座简介：分辨率、 revisit 周期、典型产品  </li>
+<li>“全国一张图 / 全球一张图”理念与数据组织方式  </li>
+<li>吉林一号数据产品类型（标准正射、融合、多光谱等）的基本认识  </li>
+<li>典型应用场景：城市变化监测、目标识别、专题制图等  </li>
+<li>实战：  </li>
+<li>从公开样例或演示数据中加载吉林一号影像  </li>
+<li>与天地图 / 其他底图叠加，制作一个“对比浏览”地图  </li>
+</ul>
+<hr />
+<h3 id="7-noaasentinel"><a href="chapter7.html">第 7 章：NOAA、Sentinel 等开源卫星数据应用</a></h3>
+<ul>
+<li>NOAA 卫星概览与全球气象 / 海洋图像特点  </li>
+<li>欧洲 Sentinel 系列简介：Sentinel-1（SAR）、Sentinel-2（多光谱）、Sentinel-3 等  </li>
+<li>数据获取渠道概览（门户与 API 的概念介绍）  </li>
+<li>典型应用：  </li>
+<li>Sentinel-2 用于地表覆盖、植被、水体监测  </li>
+<li>NOAA 数据用于云图、海表温度等可视化  </li>
+<li>实战：构建一幅基于 Sentinel-2 的区域专题图（如地表覆盖对比）  </li>
+</ul>
+<hr />
+<h3 id="8-sar"><a href="chapter8.html">第 8 章：SAR 影像与多光谱影像进阶</a></h3>
+<ul>
+<li>SAR 基本原理：主动微波、成像机制、几何特性  </li>
+<li>SAR 影像特点：斑点噪声、散射机理、粗糙度 / 湿度敏感性  </li>
+<li>多光谱与 SAR 融合的优势与挑战  </li>
+<li>典型应用示例：洪涝监测、地表形变（InSAR 概念）、农林监测  </li>
+<li>实战：  </li>
+<li>简单 SAR 影像可视化与对比拉伸  </li>
+<li>与多光谱影像叠加做“多源对比浏览”  </li>
+</ul>
+<hr />
+<h3 id="9-nadir"><a href="chapter9.html">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</a></h3>
+<ul>
+<li>nadir 正射影像与倾斜影像的差异  </li>
+<li>立体像对与三角测量的基本概念（原理讲解为主，非推导）  </li>
+<li>点云与 DSM / Mesh 模型简介  </li>
+<li>倾斜摄影与城市级三维模型构建思路  </li>
+<li>实战（流程演示为主）：从一组影像到简易三维可视化的概念流程  </li>
+</ul>
+<hr />
+<h3 id="10-street-view-api"><a href="chapter10.html">第 10 章：从三维到街景——采集流程与 Street View API</a></h3>
+<ul>
+<li>街景数据的基本形态：全景图、深度信息、位姿  </li>
+<li>从 nadir / 三维模型到街景的思路：  </li>
+<li>实景采集（车载 / 手持 / 背包）  </li>
+<li>摄像机轨迹与姿态  </li>
+<li>Google Street View / Mapillary / KartaView 等街景体系概览  </li>
+<li><strong>街景 API 调用</strong>：  </li>
+<li>Google Street View Static API / JS API 基本参数与调用方式  </li>
+<li>常见限制与法律 / 隐私注意事项（只讲原则）  </li>
+<li>实战：  </li>
+<li>构造一个简单的 HTML + JS 页面，根据坐标调用 Street View 显示街景  </li>
+<li>通过 URL 拼接的方式获取静态街景图  </li>
+</ul>
+<hr />
+<h3 id="11-bim"><a href="chapter11.html">第 11 章：室内地图构建与 BIM 融合</a></h3>
+<ul>
+<li>室内地图与室外地图的差异：楼层、连通性、导航图模式  </li>
+<li>BIM 基础概念：IFC / Revit 等格式在空间数据中的角色  </li>
+<li>从 BIM 到 GIS：  </li>
+<li>坐标对齐与高程系统  </li>
+<li>几何简化与语义抽取（房间、门、楼梯、设备等）  </li>
+<li>室内导航图结构（节点-连边图、可达性）  </li>
+<li>实战：  </li>
+<li>从简化 BIM 模型导出平面矢量（房间多边形 + 门线  </li>
+<li>在 Web 地图中以“室内平面图 + 楼层切换”的方式展示  </li>
+</ul>
+<hr />
+<h3 id="12"><a href="chapter12.html">第 12 章：多尺度地图发布——从全球到底层室内</a></h3>
+<ul>
+<li>多尺度地图体系设计：全球 / 国家 / 城市 / 街景 / 室内  </li>
+<li>多源数据组织：  </li>
+<li>全球底图（天地图、OSM、吉林一号全球一张图等）  </li>
+<li>区域 / 城市高分影像（吉林一号全国一张图、Sentinel / 其他）  </li>
+<li>街景与室内（Street View、BIM 转 GIS）  </li>
+<li>Web 发布技术栈概览：  </li>
+<li>Web 地图库（Leaflet / MapLibre GL / Cesium 等概念介绍）  </li>
+<li>瓦片服务与 3D Tiles 的基本认知  </li>
+<li>实战：集成一个“多层级地图 Demo”  </li>
+<li>全球视图：天地图 + 全球影像  </li>
+<li>城市级：吉林一号或 Sentinel 高分影像  </li>
+<li>街景级：点击街道调用街景 API  </li>
+<li>室内级：点击建筑进入室内平面图  </li>
+</ul>
+<hr />
+<h3 id="13"><a href="chapter13.html">第 13 章：综合项目与扩展方向</a></h3>
+<ul>
+<li>综合项目建议：  </li>
+<li>以某城市为例，从“球底图 + 高分影像 + DEM + 街景 + 室内”搭建一套多尺度地图  </li>
+<li>性能与优化思路：瓦片切片策略、缓存与懒加载  </li>
+<li>数据合规与隐私注意事项概览  </li>
+<li>扩展方向：  </li>
+<li>基于多源数据的目标检测 / 变化检测  </li>
+<li>三维城市数字孪生与时空大数据  </li>
+</ul>
+<hr />
+<h2 id="4">4. 推荐工具与环境（简要）</h2>
+<blockquote>
+<p>各章将具体说明，这里只做总览。</p>
+</blockquote>
+<ul>
+<li>桌面 GIS：QGIS 或同类  </li>
+<li>数据处理：GDAL、OGR、Rasterio、GeoPandas 等（Python 方向）  </li>
+<li>Web 地图：Leaflet / MapLibre GL / Cesium（任选一种作为主线示例）  </li>
+<li>编程语言：推荐 Python + JavaScript 基础  </li>
+<li>数据源：天地图、吉林一号样例数据、NOAA / Sentinel 公开放数据等  </li>
+</ul>
+<hr />
+<h2 id="5_1">5. 使用方式建议</h2>
+<ol>
+<li>按章节顺序学习，跟着“理论 + 实战”一步步操作  </li>
+<li>每一章结束时，尝试把本章产生的数据或成果“挂到地图上”  </li>
+<li>在最后综合项目中，将所有章节的知识串联起来  </li>
+<li>根据自需要，自由替换数据源（例如使用本地城市数据、行业数据）  </li>
+</ol>
+<hr />
+<p>接下来建议从 <strong><a href="chapter1.html">第 1 章：地图世界观——从地球到屏幕</a></strong> 开始阅读与实践。</p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter1.html" class="nav-link next">第 1 章：地图世界观——从地球到屏幕 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

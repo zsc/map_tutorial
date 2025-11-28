@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 8 章：SAR 影像与多光谱影像进阶</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="8-sar">第 8 章：SAR 影像与多光谱影像进阶</h1>
+<p><strong>——穿透云雾的“微波之眼”与多源数据融合</strong></p>
+<h2 id="1">1. 开篇段落</h2>
+<p>在之前的章节中，我们掌握了基于“光学”（可见光与近红外）的卫星影像。光学影像符合人类的视觉直觉，色彩丰富，易于解译。然而，在实际的全球地图构建和灾害监测中，光学影像面临着一个不可逾越的物理障碍：<strong>云雾</strong>。地球表面平均约有 60% 至 70% 的区域常年被云层覆盖，这使得在洪涝、台风或热带地区获取连续的地面数据变得极具挑战。</p>
+<p>本章将引入<strong>合成孔径雷达（SAR, Synthetic Aperture Radar）</strong>技术。作为一种主动式微波遥感，SAR 具备“全天时（Day/Night）、全天候（All-weather）”的成像能力。它不依赖太阳光，而是自带“探照灯”（发射微波），并能穿透云雨烟雾。同时，我们将探讨多光谱影像中除 RGB 之外的“隐形波段”（如短波红外、红边），并展示如何将 SAR 的<strong>结构信息</strong>与多光谱的<strong>生化信息</strong>融合（Fusion），以构建更具鲁棒性的全球动态地图。</p>
+<p><strong>本章学习目标：</strong></p>
+<ol>
+<li>深入理解 SAR 的成像物理机制：波长、极化、散射机理与雷达方程。</li>
+<li>彻底掌握 SAR 独特的侧视几何畸变（透视收缩、叠掩、阴影）及其物理成因。</li>
+<li>熟悉 SAR 数据的标准处理流水线：从 SLC/GRD 到地形校正（RTC）与分贝化（dB）。</li>
+<li>掌握多光谱的高级波段应用（SWIR, Red Edge）及指数计算。</li>
+<li>学会“SAR + 多光谱”的数据融合逻辑，解决单一数据源的痛点。</li>
+</ol>
+<hr />
+<h2 id="2">2. 核心概念与论述</h2>
+<h3 id="21-vs-sar">2.1 为什么我们需要微波？（光学 vs. SAR）</h3>
+<p>在构建多尺度地图时，理解传感器的质差异至关重要。</p>
+<p>| 特性 | 光学 (Optical) | 合成孔径雷达 (SAR) |</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">光学 (Optical)</th>
+<th style="text-align: left;">合成孔径雷达 (SAR)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>工作方式</strong></td>
+<td style="text-align: left;"><strong>被动 (Passive)</strong>：接收太阳反射光</td>
+<td style="text-align: left;"><strong>主动 (Active)</strong>：自发脉冲，接收回波</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>能量来源</strong></td>
+<td style="text-align: left;">太阳</td>
+<td style="text-align: left;">卫星自带电源</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>波长范围</strong></td>
+<td style="text-align: left;">0.4 - 2.5 $\mu m$ (微米级)</td>
+<td style="text-align: left;">1cm - 1m (厘米/分米级)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>成像依赖</strong></td>
+<td style="text-align: left;">依赖光照，受云雾、烟尘遮挡</td>
+<td style="text-align: left;">不依赖光照，穿透云雨、甚至部分植被</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>测量内容</strong></td>
+<td style="text-align: left;"><strong>化学特性</strong>：叶绿素、色素、含水量</td>
+<td style="text-align: left;"><strong>物理结构</strong>：粗糙度、几何形状、介电常数</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>视觉直观性</strong></td>
+<td style="text-align: left;">高 (所见即所得)</td>
+<td style="text-align: left;">低 (类似超声波/X光片，需专业判读)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-sar">2.2 SAR 成像物理基础</h3>
+<p>SAR 图像的每一个像素值，代表了该位置对雷达波的<strong>后向散射系数 (Backscatter Coefficient, $\sigma^0$)</strong>。</p>
+<h4 id="221">2.2.1 雷达方程与亮度决定因素</h4>
+<p>简化的雷达方程表明接收功率 $P_r$ 与目标距离 $R$ 的四次方成反比：
+$$ P_r = \frac{P_t G^2 \lambda^2 \sigma}{(4\pi)^3 R^4} $$
+其中 $\sigma$ 是雷达截面积（RCS），即地物反射能力的度量。在 SAR 图像上，$\sigma$ 主要由以下因素决定：</p>
+<ol>
+<li>
+<p><strong>表面粗糙度 (Surface Roughness)</strong>：</p>
+<ul>
+<li><strong>平滑表面</strong>（如静止水面、平坦公路）：发生<strong>镜面反射 (Specular Reflection)</strong>，能量被反射到另一侧，传感器接收到的回波极少。<strong>图像表现为黑色</strong>。</li>
+<li><strong>粗糙表面</strong>（如森林、裸土）：发生<strong>漫反射 (Diffuse Scattering)</strong>，部分能量沿原路返回。<strong>图像表现为灰色/亮色</strong>。</li>
+<li><em>Rule-of-thumb</em>: 判断表面是“粗糙”还是“平滑”，取决于瑞利判据 (Rayleigh Criterion)，即表面起伏高度 $h$ 与波长 $\lambda$ 的关系。对于长波长雷达，砾石路面可能看起来像镜子一样光滑。</li>
+</ul>
+</li>
+<li>
+<p><strong>介电常数 (Dielectric Constant)</strong>：</p>
+<ul>
+<li>主要反映<strong>含水量</strong>。水本身是强反射体（如果表面粗糙），但在自然界中，湿润的土壤通常比干燥的土壤回波更强（更亮）。</li>
+<li><em>金属物体</em>：具有极高的介电常数，回波极强。</li>
+</ul>
+</li>
+<li>
+<p><strong>几何结构 (Geometry / Double Bounce)</strong>：</p>
+<ul>
+<li><strong>角反射器 (Corner Reflector)</strong>：当雷达波射入墙角（地面+墙面）时，会发生<strong>二次散射 (Double Bounce)</strong>，能量被精确地反向送回传感器。</li>
+<li><strong>现象</strong>：城市区域在 SAR 图像中通常表现为极亮的“星点”群。</li>
+</ul>
+</li>
+</ol>
+<h4 id="222">2.2.2 波段与穿透深度</h4>
+<p>波长越长，穿透力越强。</p>
+<ul>
+<li><strong>X 波段 (~3cm, e.g., TerraSAR-X)</strong>：由于波长短，遇到树叶就会反射。用于探测<strong>树冠表面</strong>或精细的人造物体监测。</li>
+<li><strong>C 波段 (~5.6cm, e.g., Sentinel-1)</strong>：主力波段。能穿透稀疏植被，对农作物结构敏感。</li>
+<li><strong>L 波段 (~23cm, e.g., ALOS-2)</strong>：波长长，能穿透树冠层直达<strong>树干</strong>甚至地面。用于森林生物量估算、林下地形反演。</li>
+</ul>
+<h4 id="223-polarization">2.2.3 极化 (Polarization)</h4>
+<p>雷达波是横波，具有振动方向。</p>
+<ul>
+<li><strong>极化 (HH, VV)</strong>：发射和接收方向一致。VV 对海面波浪、垂直生长的作物敏感。</li>
+<li><strong>交叉极化 (HV, VH)</strong>：发射和接收方向垂直。通常发生在复杂的<strong>体积散射</strong>中（如雷达波在树冠内部多次弹射，导致偏振方向改变）。<strong>VH 是识别生物量（Biomass）的最佳指标。</strong></li>
+</ul>
+<h3 id="23">2.3 侧视几何与致命畸变</h3>
+<p>这是 SAR 最大的难点。光学相机是垂直向下看（Nadir），而 SAR 必须<strong>侧视（Side-looking）</strong>。因为如果垂直向下发射，雷达无法区分左右两侧对称的点（距离相同）。</p>
+<p><strong>测距原理</strong>：SAR 依靠测量脉冲往返的<strong>时间 ($t$)</strong> 来确定位置，即<strong>斜距 (Slant Range)</strong>。
+$$ R_{slant} = \frac{c \cdot t}{2} $$
+因为是基于“时间/距离”成像，会导致以下反直觉的几何畸变：</p>
+<h4 id="a-foreshortening">A. 透视收缩 (Foreshortening)</h4>
+<p>当雷达波照射迎雷达的斜坡时，坡底和坡顶与卫星的距离差，比它们在水平面上的距离差要小。</p>
+<ul>
+<li><strong>结果</strong>：迎坡在图像上被压缩得很窄，且非常明亮（能量堆积）。</li>
+</ul>
+<h4 id="b-layover">B. 叠掩 (Layover) —— “头重脚轻”</h4>
+<p>这是透视收缩的极端情况。</p>
+<ul>
+<li><strong>场景</strong>：当山体非常陡峭，或者面对高层建筑时。</li>
+<li><strong>现象</strong>：山顶（Top）比山底（Bottom）距离卫星<strong>更近</strong>（因为山顶“探”出来了）。</li>
+<li><strong>结果</strong>：雷达先接收到山顶的回波，后接收到山底的回波。在图像上，<strong>山顶出现在山底之前</strong>。</li>
+<li><strong>视觉效果</strong>：高楼大厦看起来像是由底座向传感器方向“倒下”覆盖在地面上。</li>
+</ul>
+<h4 id="c-shadow">C. 阴影 (Shadow)</h4>
+<p>背向雷达的陡坡，如果坡度超过了雷达入射角，雷达波照射不到该区域。</p>
+<ul>
+<li><strong>结果</strong>：形成绝对的黑区（无任何信号/噪点）。这与光学阴影不同，光学阴影里通常还有散射光，而雷达阴影是真正的信号盲区。</li>
+</ul>
+<p><strong>ASCII 图解：侧视成像与叠掩</strong></p>
+<div class="codehilite"><pre><span></span><code>       Satellite (Moving into page)
+           *
+            \      Radar Pulse
+             \     (Wavefronts)
+              \
+               \    /| Top of Building (T)
+                \  / |
+                 \/  |
+         Distance T &lt; Distance B !
+                  \  |
+                   \ | Bottom of Building (B)
+    Ground _________\|_________
+
+    Time Axis (Image):  [Start] ---&gt; [Top(T)] ---&gt; [Bottom(B)] ---&gt; [Shadow] ---&gt; [End]
+
+    Image Appearance:   The top of the building appears &quot;earlier&quot; (left/up) 
+                        in the image than the bottom.
+</code></pre></div>
+
+<h3 id="24-sar-grd-processing-chain">2.4 SAR 数据处理流水线 (GRD Processing Chain)</h3>
+<p>从数据下载到能够在 GIS 软件中与地图叠加，通常需要经过标准预处理（Pre-processing）。以 Sentinel-1 GRD 数据为例：</p>
+<ol>
+<li><strong>应用轨道文件 (Apply Orbit File)</strong>：使用精密的卫星位置数据修正元数据，提高地理定位精度。</li>
+<li><strong>热噪声去除 (Thermal Noise Removal)</strong>：去除传感器电路自身产生的背景噪声，特别是在低信号区域（如海洋）。</li>
+<li><strong>辐射定标 (Calibration)</strong>：将数字量化值（DN）转换为物理量。<ul>
+<li>$\beta^0$ (Beta Nought): 雷达亮度系数（与几何相关）。</li>
+<li>$\sigma^0$ (Sigma Nought): 后向散射系数（假设地面水平）。</li>
+<li>$\gamma^0$ (Gamma Nought): 进一步归一化，常用于地形复杂的森林分析。</li>
+</ul>
+</li>
+<li><strong>斑点滤波 (Speckle Filtering)</strong>：(可选) 使用 Lee 或 Frost 滤波器平滑椒盐噪声，保留边缘。</li>
+<li><strong>辐射地形校正 (Terrain Correction / Orthorectification)</strong>：<strong>最关键的一步</strong>。<ul>
+<li>利用 DEM（数字高程模型）将图像从“斜距几何”纠正为“地图几何”。</li>
+<li>修正因地形起伏导致的透视收缩和位置偏移。没有这一步，SAR 图像无法与地图对齐。</li>
+</ul>
+</li>
+<li><strong>分贝化 (dB Conversion)</strong>：<ul>
+<li>公式：$dB = 10 \cdot \log_{10}(\text{Linear Intensity})$</li>
+<li>作用：将动态范围极大的线性数值（如 0.001 到 100）压缩到对数区间（如 -30 到 +20），便于人眼观察和可视化增强。</li>
+</ul>
+</li>
+</ol>
+<h3 id="25-rgb">2.5 光谱影像进阶：超越 RGB</h3>
+<p>在回到“光学”领域，除了红绿蓝，我们需要掌握以下关键波段：</p>
+<ol>
+<li><strong>近红外 (NIR)</strong>：植被反射极强，水体吸收极强。<ul>
+<li><em>应用</em>：水陆分割、植被健康。</li>
+</ul>
+</li>
+<li><strong>红边 (Red Edge)</strong>：位于红光（吸收）与近红外（反射）的急剧爬升区域。<ul>
+<li><em>应用</em>：对叶绿素含量极度敏感，是精准农业监测作物营养压力的核心波段。</li>
+</ul>
+</li>
+<li><strong>短波红外 (SWIR)</strong>：<ul>
+<li><strong>对水分敏感</strong>：土壤和植被的水分含量越高，SWIR 反射率越低。</li>
+<li><strong>穿透烟雾</strong>：SWIR 波长较长，比可见光更能穿透森林火灾的烟雾，常用于火点识别和烧伤痕迹（Burn Scar）提取。</li>
+</ul>
+</li>
+</ol>
+<p><strong>常用进阶指数</strong>：</p>
+<ul>
+<li><strong>NDWI (归一化差异水体指数)</strong>：$(Green - NIR) / (Green + NIR)$ —— 突出水体。</li>
+<li><strong>NDBI (归一化差异建筑指数)</strong>：$(SWIR - NIR) / (SWIR + NIR)$ —— 突出城市不透水面。</li>
+</ul>
+<h3 id="26-fusion">2.6 多源数据融合策略 (Fusion)</h3>
+<p>如何 SAR 与多光谱结合构建更强大的地图？</p>
+<h4 id="a">场景 A：全天候洪水监测</h4>
+<ul>
+<li><strong>痛点</strong>：洪灾通常伴随暴雨，光学卫星全是云。</li>
+<li><strong>方案</strong>：<ol>
+<li>获取灾前多光谱/SAR影像作为基准（Reference）。</li>
+<li>获取灾中 SAR 影像。</li>
+<li><strong>逻辑</strong>：洪水淹没区由“粗糙地面”（亮）变为“平静水面”（暗）。</li>
+<li><strong>阈值法</strong>：提取 SAR 影像中 $\sigma^0 &lt; -15dB$ (经验值) 的区域作为淹没区，叠加到地图上。</li>
+</ol>
+</li>
+</ul>
+<h4 id="b">场景 B：作物精细分类</h4>
+<ul>
+<li><strong>痛点</strong>：有些作物颜色一样（光谱特征相似），难以区分。</li>
+<li><strong>方案</strong>：<ol>
+<li><strong>光谱特征</strong>：提供 NDVI 时间序列（物候信息）。</li>
+<li><strong>SAR 特征</strong>：提供 VV/VH 比值。玉米和水稻在生长期的结构差异巨大（水稻早期有水，SAR 呈镜面反射；玉米早期是粗糙土壤）。</li>
+<li><strong>Layer Stacking</strong>：将 [Red, NIR, SWIR, SAR_VV, SAR_VH] 叠成一个多波段立方体，输入分类器。</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h2 id="3">3. 本章小结</h2>
+<ul>
+<li><strong>物理本质</strong>：SAR 是测量微波回波特性的主动遥感，核心参数是波长、极化和入射角。</li>
+<li><strong>几何思维</strong>：必须建立“侧视”和“距离成像”的思维模型，理解叠掩（Layover）导致的高楼倒伏方向。</li>
+<li><strong>数据形态</strong>：原始数据是复数，需经过 GRD 检测、多视、地形校正（RTC）转为地图投影下的强度图。</li>
+<li><strong>dB 的意义</strong>：使用分贝（dB）单位可以有效拉伸暗部细节（水体）和抑制亮部溢出（城市）。</li>
+<li><strong>融合价值</strong>：SAR 补全了光学在云雨天气的盲区，并提供了独特的纹理与结构信息，是构建全要素全球地图不可或缺的一环。</li>
+</ul>
+<hr />
+<h2 id="4-gotchas">4. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1-ascending-vs-descending">陷阱 1：升轨与降轨的几何差异 (Ascending vs. Descending)</h3>
+<ul>
+<li><strong>现象</strong>：同一地点的两张 SAR 影像，一张建筑物向东倒，一张向西倒。</li>
+<li><strong>原因</strong>：Sentinel-1 等极轨卫星有升轨（从南向北飞，雷达向右看 -&gt; 向东看）和降轨（从北向南飞，雷达向右看 -&gt; 向西看）。</li>
+<li><strong>Gotcha</strong>：在山区制图时，升轨影像可能在山的东坡产生阴影，而降轨影像在西坡产生阴影。<strong>融合升降轨数据</strong>是消除地形阴影盲区的常用技巧。</li>
+</ul>
+<h3 id="2_1">陷阱 2：水体并不总是黑色的</h3>
+<ul>
+<li><strong>误区</strong>：看到水就觉得 SAR 图像应该是黑的。</li>
+<li><strong>例外</strong>：<ol>
+<li><strong>大风大浪</strong>：海浪使得表面粗糙，回波变强（变亮）。</li>
+<li><strong>淹没植被</strong>：如果洪水淹没了草丛或树林，雷达波会发生“水面-植被”二次散射，导致异常明亮（而不是变暗）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-dem">陷阱 3：地形校正必须使用高精度 DEM</h3>
+<ul>
+<li><strong>错误</strong>：使用默认的粗分辨率 DEM（如 90m SRTM）校正高分辨率 SAR（如 10m Sentinel-1）。</li>
+<li><strong>后果</strong>：在地形起伏区，像素纠正位置不准，导致图像出现明显的“波纹”或拉伸错误，无法与路网矢量重合。</li>
+<li><strong>建议</strong>：对于精密制图，尽量使用 Copernicus DEM (30m) 或更好的本地 DEM。</li>
+</ul>
+<h3 id="4-db">陷阱 4：统计计算时切忌直接对 dB 求平均</h3>
+<ul>
+<li><strong>错误</strong>：计算时序平均值时，直接 <code>mean(dB_values)</code>。</li>
+<li><strong>数学原理</strong>：对数域的算术平均不等于物理量的算术平均（它等于物理量的几何平均）。</li>
+<li><strong>正确做法</strong>：$dB \to Linear \to Mean \to dB$。
+$$ Mean_{dB} = 10 \cdot \log_{10} \left( \frac{1}{N} \sum 10^{(dB_i/10)} \right) $$</li>
+</ul>
+<hr />
+<p><strong>下一章预告：</strong>
+至此，我们已经掌握了二维平面的所有核心影像数据（光学与雷达）。但是，真实世界是立体的。第 9 章将利用我们在本章学到的视差原理，进一步探讨如何利用<strong>立体像对（Stereo Pair）</strong>和<strong>倾斜摄影</strong>，从二维影像中反算出三维模型（3D Mesh）和点云，让地图从平面走向立体。</p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter7.html" class="nav-link prev">← [第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</a><a href="chapter9.html" class="nav-link next">第 9 章：从 nadir 到三维——立体像对、倾斜与点云 →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

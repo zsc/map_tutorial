@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 9 章：从 nadir 到三维——立体像对、倾斜与点云</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <h1 id="9-nadir">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</h1>
+<blockquote>
+<p><strong>本章核心</strong>：
+地图不再仅仅是“铺在桌面上的一张纸”。现实世界是三维的，我们的地图也应当如此。
+本章将揭示如何通过“计算几何”的力量，从二维的卫星或无人机照片中“无中生有”地恢复出三维世界。我们将从最基础的视差原理讲起，深入到现代计算机视觉的 SfM 算法，最终构建出能承载智慧城市应用的数字孪生底座。</p>
+</blockquote>
+<h2 id="1">1. 开篇段落</h2>
+<p>在前几章中，我们构建的地图世界观主要停留在二维平面（2D）。无论是矢量路网还是卫星底图，本质上都是对地球表面的<strong>正射（Nadir）投影</strong>。这种视角虽然适合测量水平距离和规导航，但它丢失了一个至关重要的维度——<strong>高度（Z）</strong>。在正射影像中，我们只能看到建筑的“帽子”（屋顶），却看不见它的“身体”（立面）；我们能看到山的轮廓，却无法量化它的起伏。</p>
+<p>随着吉林一号等高分卫星星座的成熟以及消费级无人机的普及，获取三维数据不再是国家测绘局的专利。本章将带你跨越维度的门槛，理解<strong>立体像对（Stereo Pair）</strong>如何利用双眼视觉原理测量地形，<strong>倾斜摄影（Oblique Photography）</strong>如何捕捉城市侧面纹理，以及<strong>运动恢复结构（SfM）</strong>算法是如何把成千上万张散乱的照片拼装成精细的城市三维模型（Mesh）的。</p>
+<hr />
+<h2 id="2">2. 核心原理与论述</h2>
+<h3 id="21">2.1 视角的革命：从正射到倾斜</h3>
+<h4 id="nadir-orthophoto">正射影像 (Nadir / Orthophoto)</h4>
+<p>正射影像是视线与地面垂直（90°）拍摄的。</p>
+<ul>
+<li><strong>几何特性</strong>：消除了地形起伏引起的投影差，图像上任意两点的距离均可直接量测。</li>
+<li><strong>盲区（Dead Zone）</strong>：由于垂直向下看，所有垂直于地面的表面（如墙面、悬崖侧面）都被压缩成一条线或不可见。高层建筑还会遮挡其背后的地面（投影差）。</li>
+</ul>
+<h4 id="oblique-imagery">倾斜影像 (Oblique Imagery)</h4>
+<p>倾斜影像通常由搭载多个镜头的相机系统获取，镜头分别指向垂直、前、后、左、右（通常倾角为 45°）。</p>
+<ul>
+<li><strong>优势</strong>：能够获取建筑物的<strong>侧面纹理</strong>（Facade），符合人类在地面的观察视角。</li>
+<li><strong>挑战</strong>：图像存在严重的透视变形（近大远小），比例尺不一致，必须配合高精度的位置姿态信息（POS）和算法才能使用。</li>
+</ul>
+<p><strong>ASCII 图解：正射盲区与倾斜互补</strong></p>
+<div class="codehilite"><pre><span></span><code>       [卫星/正射相机]                      [倾斜相机]
+             |                                /   \
+             | 视线 (90°)                   / 45° \
+             v                            /       \
+      +-------------+ (屋顶可见)         v         v
+      |  高层建筑   |                  视线A       视线B
+      |             |                    \         /
+      | (墙面不可见)|                     \       /
+------+-------------+------地面       -----+-------+-----
+      ^             ^                      ^       ^
+     盲区          盲区                  墙面A    墙面B
+ (被屋顶遮挡)   (被屋顶遮挡)             (清晰可见)
+</code></pre></div>
+
+<h3 id="22">2.2 立体摄影测量原理</h3>
+<p>计算机从影像恢复三维的原理，源于生物的<strong>双目立体视觉</strong>。核心在于捕捉<strong>视差（Parallax）</strong>。</p>
+<h4 id="1_1">1. 视差与深度的关系</h4>
+<p>假设我们在两个不同位置拍摄同一个物体。物体在左图中出现在位置 $x_L$，在右图中出现在位置 $x_R$。这两个位置的差值 $d = x_L - x_R$ 就是视差。</p>
+<p><strong>基础公式（正摄立体情况）</strong>：
+$$ Z = \frac{f \cdot B}{d} $$</p>
+<ul>
+<li>$Z$：深度（飞行高度或物体距离）。</li>
+<li>$f$：相机焦距。</li>
+<li>$B$：基线长度（Baseline，两次拍摄位置的理距离）。</li>
+<li>$d$：视差（Parallax）。</li>
+</ul>
+<blockquote>
+<p><strong>直观理解</strong>：</p>
+<ul>
+<li>将手指放在眼前（距离近，$Z$小），交替闭眼，手指位置跳动剧烈（视差 $d$ 大）。</li>
+<li>看远处的山峰（距离远，$Z$大），交替闭眼，山峰几乎不动（视差 $d$ 趋近于 0）。</li>
+<li><strong>结论</strong>：视差与深度成反比。通过测量像素的移动量，就能反推实际距离。</li>
+</ul>
+</blockquote>
+<h4 id="2-bh-ratio">2. 基高比 (B/H Ratio) 的权衡</h4>
+<p>在卫星或航空摄影中，基线 $B$ 与飞行高度 $H$ 的比值至关重要。</p>
+<ul>
+<li><strong>Rule of Thumb - 基高比选择</strong>：<ul>
+<li><strong>平坦地形（城市/平原）</strong>：推荐 <strong>大基高比 (B/H $\approx$ 0.8 - 1.0)</strong>。大的视角差异能捕捉微小的高程变化，提高高程精度。</li>
+<li><strong>高山峡谷/高层建筑区</strong>：推荐 <strong>小基高比 (B/H $\approx$ 0.5 - 0.6)</strong>。如果基线太长，左右两张照片看到的景象差异太大（例如一张看到楼的前面，一张看到楼的后面），会导致无法找到同名点（Matching Failure），或者产生严重的遮挡死角。</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-sfm-mvs">2.3 现代三维重建管线：SfM 与 MVS</h3>
+<p>传统的摄影测量需要严格的立体像对，而现代计算机视觉引入了自动化程度极高的 <strong>SfM-MVS 管线</strong>。这是目前主流软件（如 ContextCapture, Metashape, DJI Terra）的核心逻辑。</p>
+<h4 id="sfm-structure-from-motion">阶段一：运动恢复结构 (SfM - Structure from Motion)</h4>
+<p>SfM 的目标是解算<strong>每一张照片拍摄时的确切位置和角度</strong>，并生成<strong>稀疏点云</strong>。</p>
+<ol>
+<li><strong>特征提取 (Feature Extraction)</strong>：算法在每张照片中寻找“特征点”（如 SIFT 算子），这些点通常是角点、边缘或纹理丰富的地方。</li>
+<li><strong>特征匹配 (Matching)</strong>：在不同照片中寻找同一个特征点（同名点）。</li>
+<li><strong>光束法平差 (Bundle Adjustment)</strong>：这是一个巨大的优化问题。算法通过调整相机位姿和三维点坐标，使得这些三维点投影回照片时，与实际观测点的误差（重投影误差）最小化。<ul>
+<li><em>输出</em>：疏点云（Sparse Cloud）+ 相机参数（外参 R/T + 内参 f/cx/cy）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="mvs-multi-view-stereo">阶段二：多视立体匹配 (MVS - Multi-View Stereo)</h4>
+<p>SfM 只有稀疏的点，MVS 的目标是对<strong>几乎每一个像素</strong>都计算深度，生成<strong>致密点云</strong>。</p>
+<ol>
+<li><strong>极线搜索 (Epipolar Search)</strong>：利用几何约束，将搜索同名点的范围从“全图”缩小到“一条线”上，极大提高效率。</li>
+<li><strong>深度图计算 (Depth Map)</strong>：为每一张照片生成深度图。</li>
+<li><strong>点云融合</strong>：将所有深度图投影到三维空间，过滤噪点，生成海量的彩色点云。<ul>
+<li><em>输出</em>：致密点云（Dense Cloud），通常包含数亿个点。</li>
+</ul>
+</li>
+</ol>
+<h3 id="24-dsm-dtm-mesh">2.4 数据产品的进阶：DSM, DTM 与 Mesh</h3>
+<p>从点云到最终的地图产品，还需要经过不同的处理步骤。</p>
+<h4 id="1-dsm-vs-dtm">1. DSM vs. DTM</h4>
+<p>这是地形分析中最容易混淆的概念。</p>
+<ul>
+<li><strong>DSM (数字表面模型)</strong>：包含地表<strong>所有物体</strong>的高程（树木、房屋、车辆、人）。<ul>
+<li><em>用途</em>：视域分析、5G 信号传播模拟、违建监测。</li>
+</ul>
+</li>
+<li><strong>DTM (数字地形模型)</strong>：剥离了地表物体，只保留<strong>裸露地表</strong>（Bare Earth）的高程。<ul>
+<li><em>处理</em>：通过滤波算法（如布料模拟滤波 CSF）将点云分为“地面点”和“非地面点”。</li>
+<li><em>用途</em>：水文分析（洪水淹没）、土方量计算、道路选线。
+$$ \text{CHM (冠层高度模型)} = \text{DSM} - \text{DTM} $$
+<em>(注：CHM 常用于林业，计算树高)</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="2-mesh">2. 三维网格 (Mesh) 与纹理映射</h4>
+<p>点云虽然密集，但放大看还是离散的点。为了获得逼真的视觉效果，需要构建 Mesh。</p>
+<ul>
+<li><strong>TIN 构建</strong>：将点云连接成不规则三角网。</li>
+<li><strong>纹理映射 (Texture Mapping)</strong>：从原始照片中提取颜色，像“贴墙纸”一样贴到三角形表面。这是决定模型是否好看的关键。</li>
+<li><strong>LOD (Level of Detail)</strong>：为了在 Web 上流畅浏览，Mesh 会被切片并分层（如 <strong>Cesium 3D Tiles</strong> 或 <strong>OSGB</strong> 格式）。远看加载粗糙模型拉近加载精细模型。</li>
+</ul>
+<hr />
+<h2 id="3">3. 典型应用场景对比</h2>
+<h3 id="a">场景 A：吉林一号“全球地形”</h3>
+<ul>
+<li><strong>数据源</strong>：卫星立体像对（三线阵推扫：前视、正视、后视）。</li>
+<li><strong>特点</strong>：覆盖广，不需要申请空域。分辨率通常在 0.5m - 2m 级别。</li>
+<li><strong>产出</strong>：主要是 <strong>DSM / DTM</strong>。</li>
+<li><strong>局限</strong>：很难生成精细的侧面纹理，建筑物通常表现为“2.5D 拉伸块”。</li>
+</ul>
+<h3 id="b">场景 B：无人机城市数字孪生</h3>
+<ul>
+<li><strong>数据源</strong>：五镜头倾斜摄影无人机。</li>
+<li><strong>特点</strong>：分辨率极高（厘米级），包含丰富的侧面信息。</li>
+<li><strong>产出</strong>：<strong>实景三维 Mesh</strong>。</li>
+<li><strong>局限</strong>：数据量巨大（一个小区可能几百 GB），处理时间长，涉及隐私和保密问题。</li>
+</ul>
+<hr />
+<h2 id="4">4. 本章小结</h2>
+<ol>
+<li><strong>维度提升</strong>：立体像对和倾斜摄影利用<strong>视差原理</strong>，让我们从 2D 影像跨越到 3D 空间。</li>
+<li><strong>算法核心</strong>：<strong>SfM</strong> 负责解算相机位置（稀疏重建），<strong>MVS</strong> 负责生成节（致密重建）。</li>
+<li><strong>数据重叠是关键</strong>：没有足够的重叠度（Overlap），就没有视差匹配的基础。</li>
+<li><strong>产品分级</strong>：<ul>
+<li><strong>点云</strong>：原始测量数据。</li>
+<li><strong>DSM</strong>：地表最外层轮廓（含建筑/树）。</li>
+<li><strong>DTM</strong>：裸地轮廓（去除了地物）。</li>
+<li><strong>Mesh</strong>：可视化的终极形式，兼具几何结构与照片纹理。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="5-gotchas">5. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="1_2">1. 弱纹理区域的“空洞”与“乱网”</h3>
+<ul>
+<li><strong>现象</strong>：在白墙、柏油马路、积雪覆盖区或平静的水面，生成的模型出现大洞或扭曲。</li>
+<li><strong>原因</strong>：SfM/MVS 依赖<strong>特征点</strong>。如果表面颜色单一（弱纹理）或随视角变化（水面反光），算法找不到同名点，无法计算深度。</li>
+<li><strong>解决</strong>：<ul>
+<li>水面：通常需要后期在 GIS 软件中通过矢量面进行“压平”修复（Water flattening）。</li>
+<li>拍摄：避免在正午强光下拍摄水面；对于白墙，依靠周边物体约束或接受精度损失。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2_1">2. 重叠度不足导致的“断层”</h3>
+<ul>
+<li><strong>现象</strong>：模型中间断开，或者高楼变成“比萨斜塔”。</li>
+<li><strong>原因</strong>：航向重叠率（Front Overlap）或旁向重叠率（Side Overlap）设置过低。</li>
+<li><strong>Rule of Thumb</strong>：<ul>
+<li>卫星立体：由于轨道稳定，重叠度由设计决定。</li>
+<li><strong>无人机倾斜</strong>：建议航向重叠 $\ge 80\%$，旁向重叠 $\ge 70\%$。高楼密集区甚至需要更高。宁可多拍，不可少拍。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-vs">3. 高程基准的混淆（椭球高 vs. 海拔高）</h3>
+<ul>
+<li><strong>陷阱</strong>：辛辛苦苦做出来的 DEM，和已有的矢量路网叠加时，路网悬在半空或埋在地下，相差几十米。</li>
+<li><strong>原因</strong>：<ul>
+<li>卫星/GPS 原生测量的是 <strong>WGS84 椭球高</strong>（几何高度）。</li>
+<li>工程地图通常使用 <strong>EGM96 / EGM2008 / 1985国家高程基准</strong>（重力相关的大地水准面高）。</li>
+</ul>
+</li>
+<li><strong>调试</strong>：两者之间存在几十米的差异（Geoid Undulation）。在数据处理软件导出时，必须明确指定是否加载了<strong>大地水准面格网文件（Geoid Grid）</strong>进行校正。</li>
+</ul>
+<h3 id="4_1">4. 植被穿透的误解</h3>
+<ul>
+<li><strong>误区</strong>：认为摄影测量能像激光雷达（LiDAR）一样穿透树林看到地面。</li>
+<li><strong>真相</strong>：摄影测量是<strong>被动光学</strong>技术，只能重建“看得到”的表面。如果树叶很密，生成的 DTM 在树林区域只能是基于树冠边缘插值的猜测值，精度远低于 LiDAR。</li>
+</ul>
+<hr />
+<p><a href="chapter10.html">下一章：从三维到街景——采集流程与 Street View API</a></p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter8.html" class="nav-link prev">← 第 8 章：SAR 影像与多光谱影像进阶</a><a href="chapter10.html" class="nav-link next">第 10 章：从三维到街景——采集流程与 Street View API →</a></nav>
+        </main>
+    </div>
+</body>
+</html>

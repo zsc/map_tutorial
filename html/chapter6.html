@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="./">
+    <title>第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/highlight.css">
+    <script src="assets/script.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],
+                displayMath: [['$$', '$$']],
+                processEscapes: false,
+                packages: {'[+]': ['noerrors', 'ams']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {
+                load: ['[tex]/noerrors', '[tex]/ams']
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>目录</h3>
+                <button id="sidebar-toggle" class="sidebar-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" id="sidebar-search-input" placeholder="搜索..." autocomplete="off">
+            </div>
+            <div id="tree-container">
+                <nav class="tree-nav" role="tree">
+                    <div class="tree-item " >
+                        <a href="index.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">全球地图：矢量、影像、地形</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter1.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 1 章：地图世界观——从地球到屏幕</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter2.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 2 章：矢量地图基础与空间分析</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter3.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 3 章：栅格影像与遥感入门（含多光谱）</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter4.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 4 章：DEM 与地形分析基础</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter5.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 5 章：在线底图与天地图生态</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item active" >
+                        <a href="chapter6.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter7.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md)</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter8.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 8 章：SAR 影像与多光谱影像进阶</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter9.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 9 章：从 nadir 到三维——立体像对、倾斜与点云</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter10.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 10 章：从三维到街景——采集流程与 Street View API</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter11.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 11 章：室内地图构建与 BIM 融合</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter12.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 12 章：多尺度地图发布——从全球到底层室内</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="chapter13.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">第 13 章：综合项目与扩展方向——构建数字孪生世界</span>
+                        </a>
+                    </div>
+                
+                    <div class="tree-item " >
+                        <a href="CLAUDE.html" class="tree-link">
+                            <span class="tree-icon">📄</span>
+                            <span class="tree-title">Untitled</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <article>
+                <p>这是一个经过大幅扩写和深化的 <strong>第 6 章</strong>。本章不再局限于简单的产品介绍，而是深入到了商业遥感星座的<strong>成像机理</strong>、<strong>数据处理流水线</strong>以及<strong>工程化应用</strong>的核心逻辑，帮助读者真正理解如何驾驭这种高时效性的海量数据。</p>
+<hr />
+<h1 id="6">第 6 章：吉林一号影像与“全国一张图 / 全球一张图”</h1>
+<h2 id="1">1. 开篇段落</h2>
+<p>在之前的章节中，我们建立起了地图的骨架（矢量）和基础皮肤（天地图底图）。然而，在现代 Web 地图应用——尤其是数字孪生、智慧城市和应急指挥场景中，用户越来越不满足于“几个月甚至几年前”的卫星底图。他们需要看到<strong>上周</strong>甚至<strong>昨天</strong>的地面情况，并且还要能看清地面上的车辆、路标和临时建筑。</p>
+<p>这就引出了本章的主角：<strong>吉林一号（Jilin-1）</strong>。作为目前全球最大的亚米级商业遥感卫星星座，它代表了“新航天（New Space）”时代的典型特征：<strong>高频重访、快速覆盖、工业化生产</strong>。</p>
+<p>本章将带你深入卫星遥感的“后台”。我们将解析从数百公里外的太空拍摄一张照片，到将其无缝拼接到 Web 地图上的全过程。我们将探讨“推扫式成像”的原理、RPC 模型在定位中的作用，以及“一张图”产品背后复杂的匀色与镶嵌逻辑。通过本章，你将不再仅仅是地图的使用者，而是能够从数据生产者的视角去理解高分影像的优势与局限。</p>
+<hr />
+<h2 id="2">2. 深度论述</h2>
+<h3 id="21">2.1 星座革命：从“定点拍照”到“全时段监控”</h3>
+<p>要理解吉林一号的数据特点，首先要理解其星座设计逻辑。传统的对地观测卫星（如 Landsat）通常是太阳同步轨道（SSO）的单星，它们像公交车一样，严格按照固定的时刻表经过某地（例如每16天上午10:30）。</p>
+<p>吉林一号采用的是<strong>混合星座</strong>设计：</p>
+<ol>
+<li><strong>太阳同步轨道卫星</strong>：保证全球覆盖，提供稳定的底图数据。</li>
+<li><strong>非太阳同步轨道卫星</strong>：利用不同的轨道倾角，实现对同一地点的<strong>一日多次重访</strong>（早中晚均可拍摄）。</li>
+</ol>
+<p><strong>成像模式：推扫式（Push-broom）与敏捷机动</strong></p>
+<p>与我们手机拍照的“面阵（Frame）”成像不同，高分卫星主要采用<strong>线阵推扫（Push-broom）</strong>方式。</p>
+<blockquote>
+<p><strong>概念图解：推扫成像</strong>
+想象你在使用一台平板扫描仪扫描文件。扫描头是一条线，它扫过哪里，哪里就被成像。
+在太空中，卫星本身就是那个移动的“扫描头”，利用卫星的飞行速度向前“扫”过地面。</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><code>      Satellite (Moving Direction ---&gt;)
+         [====]  &lt;-- 线性传感器 (Line Sensor)
+           \/
+           /\   &lt;-- 视场角 (FOV)
+          /  \
+         /    \
+ Ground +------+  &lt;-- 扫描带 (Swath)
+        | Area |
+
+        | Area |
+        |      |
+        |      |
+
+        +------+
+</code></pre></div>
+
+<p><strong>敏捷机动（Agility）</strong>：
+为了拍摄不在正下方的目标，吉林一号卫星具备极强的姿态控制能。它可以侧身（Roll）、俯仰（Pitch）甚至进行以目标为中心的凝视拍摄。</p>
+<ul>
+<li><strong>优势</strong>：不必等卫星飞到头顶也能拍照，极大提高了获取数据的概率。</li>
+<li><strong>代价</strong>：产生了<strong>大侧摆角（High Off-Nadir Angle）</strong>。这直接导致了高楼大厦在地图上看起来是“歪”的（详见后文“常见陷阱”）。</li>
+</ul>
+<hr />
+<h3 id="22-rpc">2.2 核心技术：RPC 模型与几何校正</h3>
+<p>当你拿到一张原始的吉林一号影像（L1级产品）时，它是不带地理坐标的，或者坐标误差很大。为了把它准确地贴到地图上，需要使用 <strong>RPC（Rational Polynomial Coefficients，有理多项式系数）</strong> 模型。</p>
+<p><strong>RPC 模型原理（数学概念）：</strong></p>
+<p>传统的摄影测量使用共线方程，计算复杂且需要卫星的具体物理参数（焦距、姿态等）。RPC 模型是一种通用的数学近似，它建立了“像点坐标 $(r, c)$”与“地面坐标 $(Lat, Lon, Height)$”之间的映射关系。</p>
+<p>公式通常表示为个三阶多项式的比值：</p>
+<p>$$
+r = \frac{P_1(Lat, Lon, H)}{P_2(Lat, Lon, H)} \\
+c = \frac{P_3(Lat, Lon, H)}{P_4(Lat, Lon, H)}
+$$</p>
+<p>其中 $r, c$ 是影像上的行号和列号，$Lat, Lon, H$ 是经纬度和高程。</p>
+<blockquote>
+<p><strong>Rule of Thumb (经验法则)</strong>：
+在处理高分卫星影像时，<strong>必须要有一个高精度的 DEM（数字高程模型）</strong> 参与 RPC 解算。
+如果不使用 DEM 而假设地面是平的（平均高程），在山区或高差大的城市，影像上的道路和建筑会发生数十米的错位。</p>
+</blockquote>
+<hr />
+<h3 id="23">2.3 “一张图”生产流水线：从碎片到无缝</h3>
+<p>“吉林一号一张图”并非卫星直接拍出来的，而是地面处理系统高度自动化的产物。其核心挑战在于：<strong>如何把成千上万张不同时间、不同天气、不同角度拍的照片，拼成一张看起来像是同一时刻拍摄的完整地图？</strong></p>
+<p><strong>生产流程 (Pipeline)：</strong></p>
+<ol>
+<li><strong>数据清洗与筛选</strong>：<ul>
+<li>剔除云量 &gt; 10% 的数据。</li>
+<li>剔除侧摆角 &gt; 25° 的数据（防止建筑遮挡道路）。</li>
+</ul>
+</li>
+<li><strong>正射纠正 (Orthorectification)</strong>：<ul>
+<li>利用 RPC + DEM，将透视影像拉伸为正射影像（DOM）。</li>
+</ul>
+</li>
+<li><strong>色彩一致性处理 (Color Balancing)</strong>：<ul>
+<li><strong>匀色</strong>：消除大气影响（去雾）和季节差异。例如，将冬天的枯草“调色”成接近夏天的绿色，或者整体统一为自然的色调。</li>
+<li><strong>直方图匹配</strong>：以一张标准的底图（如 Landsat 或 Sentinel）为基准，强制对齐色调。</li>
+</ul>
+</li>
+<li><strong>镶嵌与接边 (Mosaicking &amp; Seamlines)</strong>：<ul>
+<li><strong>接缝线网络</strong>：算法会自动寻找影像重叠区域中“差异最小”的路径作为切割线（例如沿河流、道路中心线切割，避开切断建筑物）。</li>
+<li><strong>羽化 (Feathering)</strong>：在接缝处进行像素混合，使过渡不可见。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="24">2.4 数据产品分级与应用</h3>
+<p>了解数据级别对于正确使用至关重要：</p>
+<ul>
+<li><strong>L1 原始辐射产品</strong>：包含 RPC 文件，像素值代表传感器接收的射亮度。<strong>用途</strong>：科研、极高精度的摄影测量。</li>
+<li><strong>L2 系统几何校正产品</strong>：经过了粗略的地图投影，但未精细校正地形畸变。</li>
+<li><strong>L3 正射影像产品 (DOM)</strong>：也就是“一张图”的组成单元。已经纠正了地形畸变，具有准确的地理位置。<strong>用途</strong>：绝大多数 GIS 应用、底图服务。</li>
+<li><strong>L4 镶嵌产品</strong>：多景 L3 拼成的大幅面影像。</li>
+</ul>
+<p><strong>多光谱融合 (Pan-sharpening) 进阶</strong>：
+吉林一号的高分影像（0.75m）通常是黑白的（全色），彩色（多光谱）分辨率通常较低（3m左右）。
+为了获得 <strong>0.75m 的彩色影像</strong>，必须进行融合。</p>
+<ul>
+<li><strong>Gram-Schmidt 变换</strong> 或 <strong>NNDiffuse</strong> 算法是目前常用的商业融合算法，它们比传统的 IHS 变换更能保持光谱的真实性（即颜色不失真）。</li>
+</ul>
+<hr />
+<h2 id="3">3. 本章小结</h2>
+<ol>
+<li><strong>成像视角</strong>：吉林一号利用<strong>推扫式</strong>成像和<strong>侧摆机动</strong>，实现了高频次重访，但也引入了复杂的几何变形投影差。</li>
+<li><strong>定位核心</strong>：<strong>RPC 模型</strong>是连接影像像素与地理坐标的桥梁，而 <strong>DEM</strong> 是修正地形投影差的关键数据。</li>
+<li><strong>一张图逻辑</strong>：“一张图”是工程化的产物，它是通过<strong>筛选、正射、匀色、镶嵌</strong>四个步骤，将时空碎片重构为连续表面的过程。</li>
+<li><strong>数据选择</strong>：对于一般地图应用，直接使用 <strong>WMTS 服务</strong> 或 <strong>L3/L4 级产品</strong>；对于光谱分析，必须回溯使用 <strong>L1/L2 级原始数据</strong>。</li>
+</ol>
+<hr />
+<h2 id="4-gotchas">4. 常见陷阱与错误 (Gotchas)</h2>
+<h3 id="41">4.1 陷阱：“真假”正射与建筑物遮挡</h3>
+<ul>
+<li><strong>现象</strong>：你购买了“正射影像（DOM）”，但在地图上发现高楼大厦依然遮挡了背后的街道（Building Lean）。</li>
+<li><strong>真相</strong>：标准的 DOM 仅利用 DEM（地面高程）进行校正，它把地面拉平了，但无法移除地面上的物体（建筑、树木）的透视投影。</li>
+<li><strong>影响</strong>：不要试图在普通 DOM 上准确量算建筑底部的面积，也不要指望能看到高楼背面的所有细节。如果必须解决此问题，需要昂贵的“真正射（True Ortho）”产品。</li>
+</ul>
+<h3 id="42-temporal-confusion">4.2 陷阱：时相混淆（Temporal Confusion）</h3>
+<ul>
+<li><strong>现象</strong>：在一个街区，路左边是晴天，路右边地面是湿的；或者一条新建的道路在某处突然断开，过一段又接上了。</li>
+<li><strong>原因</strong>：这是“镶嵌”带来的副作用。为了凑齐一张无云的地图，算法可能拼接了相隔数月甚至数年的影像。</li>
+<li><strong>调试技巧</strong>：<ul>
+<li>不要假定一张图上的所有要素是同一时刻存在的。</li>
+<li>如果发现逻辑冲突（如断头路），请检查该区域是否存在<strong>接缝线（Seamline）</strong>。</li>
+<li>使用提供的“元数据（Metadata）”查询具体像素的拍摄时间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="43-8-bit-vs-16-bit">4.3 陷阱：色彩深度的坑 (8-bit vs 16-bit)</h3>
+<ul>
+<li><strong>现象</strong>：拿到的 GeoTIFF 图像在普通图片查看器里一片漆黑，或者在 GIS 软件里对比度极低。</li>
+<li><strong>原因</strong>：原始卫星数据通常是 <strong>11-bit 或 16-bit</strong> 的，记录了极宽的动态范围（从最暗的阴影到最亮的云层）。普通显示器只能显示 8-bit。</li>
+<li><strong>解决方案</strong>：<ul>
+<li>不要以为数据坏了。</li>
+<li>在 GIS 软件中进行 <strong>拉伸（Stretching）</strong>：如“2% - 98% 累计计数切割”或“标准差拉伸”，将 16-bit 的数据映射到人眼舒适的 8-bit 区间进行显示。</li>
+<li>导出用于 Web 发布的切片（Tiles）时，必须将其转为 8-bit PNG/JPG，否则浏览器无法渲染。</li>
+</ul>
+</li>
+</ul>
+<h3 id="44-web-mercator">4.4 陷阱：Web Mercator 的面积变形</h3>
+<ul>
+<li><strong>现象</strong>：在 Web 地图（使用 EPSG:3857）上测量吉林一号影像中的地块面积，发现比实际产权证上的面积大很多（尤其在高纬度地区）。</li>
+<li><strong>原因</strong>：Web Mercator 投影在高纬度地区存在巨大的面积变形。</li>
+<li><strong>对策</strong>：吉林一号影像本身精度很高，但投影选错了测量就不准。进行面积测量时，务必将数据重投影到 <strong>UTM</strong> 或 <strong>高斯-克吕格（Gauss-Krüger）</strong> 等等面积/等角性质更好的局部投影坐标系下进行计算。</li>
+</ul>
+<hr />
+<p><strong><a href="chapter7.html">下一章：NOAA、Sentinel 等开源卫星数据应用</a></strong>
+了解完商业卫星的极致细节后，我们将目光转向宏大的科学监测。下一章将介绍如何免费获取 Sentinel-2 的多光谱数据来分析植被健康，以及利用 NOAA 数据追踪全球气象变化。</p>
+            </article>
+            
+            <nav class="page-nav"><a href="chapter5.html" class="nav-link prev">← 第 5 章：在线底图与天地图生态</a><a href="chapter7.html" class="nav-link next">[第 7 章：NOAA、Sentinel 等开源卫星数据应用](chapter7.md) →</a></nav>
+        </main>
+    </div>
+</body>
+</html>
