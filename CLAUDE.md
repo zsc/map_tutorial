@@ -1,8 +1,7 @@
 （交流可以用英文，所有文档中文）
 
 ## 项目目标
-编写一份《全球地图：矢量、影像、地形》的中文课程markdown
-文件组织是 index.md + chapter1.md + ...
+编写一份《全球地图：矢量、影像、地形》的中文课程markdown 从原理到实践。 结合 DEM、google street view 采集、BIM 等，并覆盖天地图、吉林一号（详细介绍吉林一号全国一张图/全球一张图）、noaa 卫星图等。如何从 nadir 到街景图。如何街景 api 调用。室内地图构建。SAR 图和多光谱图。欧洲 sentinel 卫星图应用。 文件组织是 index.md + chapter1.md + ...
 不写代码
 
 ## 章节结构要求
